@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:23:57 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/17 11:23:36 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:57:29 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,19 @@ void	ft_minishell(t_data *data)
 
 void	ft_execute_minishell(t_data *data, char *line)
 {
-	// (void)line;
-	if (ft_unclosed_quote(line))
+	// if (ft_unclosed_quote(line))
+	// 	return ;
+	if (ft_lexer(data, line) == 1)
 		return ;
-	ft_lexer(data, line);
-	ft_parser(data);
-	if (ft_error_separator(data, data->plist))
-	{
-		ft_free_parsing(data);
-		return ;
-	}
-	data->cmds_nb = ft_cmd_count(data);
-	ft_execute_init(data);
+	// ft_parser(data);
+	// if (ft_error_separator(data, data->plist))
+	// {
+	// 	ft_free_parsing(data);
+	// 	return ;
+	// }
+	// data->cmds_nb = ft_cmd_count(data);
+	// ft_parser_redirec(data, data->plist);
+	// ft_execute_init(data);
 	// ft_link_exec(data);
 	// ft_heredoc_path(data);
 	// ft_execute(data);

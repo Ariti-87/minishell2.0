@@ -3,32 +3,33 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 11:21:23 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/17 11:55:50 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/17 16:28:35 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Count the number of tokens of a specific type in a token list.
-int	ft_token_type_nb(t_token *list, enum e_type type)
-{
-	int		i;
-	t_token	*tmp;
 
-	i = 0;
-	tmp = list;
-	while (list)
-	{
-		if (list->type == type)
-			i++;
-		list = list->next;
-	}
-	list = tmp;
-	return (i);
-}
+// // Count the number of tokens of a specific type in a token list.
+// int	ft_token_type_nb(t_token *list, enum e_type type)
+// {
+// 	int		i;
+// 	t_token	*tmp;
+
+// 	i = 0;
+// 	tmp = list;
+// 	while (list)
+// 	{
+// 		if (list->type == type)
+// 			i++;
+// 		list = list->next;
+// 	}
+// 	list = tmp;
+// 	return (i);
+// }
 
 // Count the number of consecutive tokens of a specific type in a token list.
 int	ft_type_nb(t_token *nlist, enum e_type type)

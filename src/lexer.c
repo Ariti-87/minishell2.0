@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:14:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:26:15 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:54:59 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	ft_lstadd_back_token(t_token **lst, t_token *n)
 }
 
 // Create a token structure based on a string and a quote character.
-t_token	*ft_token(char *str, char quote)
+int	*ft_token(char *str, char quote)
 {
 	t_token	*token;
 
@@ -72,24 +72,44 @@ t_token	*ft_token(char *str, char quote)
 		return (NULL);
 	*(token->str) = *str;
 	token->next = NULL;
-	return (token);
+	return (start);
+}
+
+int	set_status_quote(int quote, char *line, int i)
+{
+	if (line[i] == '\'' && quote == N_QUOTE)
+		quote = S_QUOTE;
+	else if (line[i] == '\"' && quote == N_QUOTE)
+		quote = D_QUOTES;
+	else if (line[i] == '\'' && quote == S_QUOTE)
+		quote = N_QUOTE;
+	else if (line[i] == '\"' && quote == D_QUOTES)
+		quote = D_QUOTES;
+	// ft_lstadd_back_token(&data->tlist, ft_token(&line[i], quote));
+	return (quote);
 }
 
 // Tokenize an input line and add tokens to a token list, considering quotes.
-void	ft_lexer(t_data *data, char *line)
+int	ft_lexer(t_data *data, char *line)
 {
-	int		i;
-	char	quote;
+	int	i;
+	int	quote;
+	int	start;
 
+	start = 0;
 	i = 0;
-	quote = 0;
+	quote = N_QUOTE;
 	while (line && line[i])
 	{
-		if (quote && quote == line[i] && ft_belong("'\"", line[i]))
-			quote = 0;
-		else if (!quote && ft_belong("'\"", line[i]))
-			quote = line[i];
-		ft_lstadd_back_token(&data->tlist, ft_token(&line[i], quote));
+		quote = set_status_quote(quote, line, i);
+		if (quote == N_QUOTE)
+			start = ft_token(&i, line, start, data);
 		i++;
 	}
+	if (quote != N_QUOTE)
+	{
+		ft_putstr_fd("error: unclosed quotes\n", 2);
+		return (1);
+	}
+	return (0);
 }

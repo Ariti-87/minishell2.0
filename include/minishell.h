@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:03:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/16 17:42:32 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/17 17:53:02 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,21 @@
 
 enum e_type
 {
-	ALPHANUM,
-	SEPARATOR,
+	WORD,
+	SPACE = 1,
+	VAR,
+	PIPE,
+	LESS,
+	GREAT,
+	LESS_LESS,
+	GREAT_GREAT,
+};
+
+enum e_quote
+{
+	N_QUOTE,
+	S_QUOTE,
+	D_QUOTES
 };
 
 typedef struct s_coor
@@ -75,6 +88,7 @@ typedef struct s_data
 	pid_t			*pid;
 	struct s_token	*tlist;
 	struct s_token	*plist;
+	struct s_token	*flist;
 	struct s_cmd	**cmds;
 	struct s_env	*env;
 	struct s_env	*export;
@@ -168,7 +182,7 @@ int				ft_type_token(char c);
 void			ft_lstadd_back_token(t_token **lst, t_token *n);
 t_token			*ft_token(char *str, char quote);
 int				ft_cmd_count(t_data *data);
-void			ft_lexer(t_data *data, char *line);
+int				ft_lexer(t_data *data, char *line);
 int				ft_error_separator(t_data *data, t_token *list);
 int				ft_lstsize_token(t_token *list);
 int				ft_same_char(char *str, char c, int len);
@@ -179,7 +193,7 @@ void			ft_parser(t_data *data);
 void			ft_parser_list(t_data *data);
 t_token			*ft_tokenize(int next_gr, t_token *nlist);
 char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
-int				ft_token_type_nb(t_token *list, enum e_type type);
+// int				ft_token_type_nb(t_token *list, enum e_type type);
 void			ft_clear_space(t_data *data, t_token *list);
 void			ft_parser_redirec(t_data *data, t_token *list);
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
+#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 16:02:04 by arincon           #+#    #+#              #
-#    Updated: 2023/10/17 10:50:19 by arincon          ###   ########.fr        #
+#    Updated: 2023/10/17 14:20:13 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -81,6 +81,7 @@ SRCS		:=				\
 	parser_var_utils.c		\
 	parser_sep.c			\
 	parser_sep_utils.c		\
+	parser_redirec.c		\
 	link.c
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
