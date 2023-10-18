@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/27 15:14:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 17:25:33 by ddania-c         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/10/18 18:48:50 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -85,6 +86,12 @@ int	ft_lexer(t_data *data, char *line)
 			start = ft_token(&i, line, start, data);
 		i++;
 	}
+	if (quote != N_QUOTE)
+	{
+		ft_putstr_fd("error: unclosed quotes\n", 2);
+		return (1);
+	}
+	return (0);
 	if (quote != N_QUOTE)
 	{
 		ft_putstr_fd("error: unclosed quotes\n", 2);

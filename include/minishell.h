@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/07 18:03:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 17:45:29 by ddania-c         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/10/18 18:48:23 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -204,7 +205,7 @@ void			ft_parser(t_data *data);
 void			ft_parser_list(t_data *data);
 t_token			*ft_tokenize(int next_gr, t_token *nlist);
 char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
-int				ft_token_type_nb(t_token *list, enum e_type type);
+// int				ft_token_type_nb(t_token *list, enum e_type type);
 void			ft_clear_space(t_data *data, t_token *list);
 void			ft_parser_redirec(t_data *data, t_token *list);
 

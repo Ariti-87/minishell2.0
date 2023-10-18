@@ -5,10 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/24 18:50:45 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 16:59:09 by ddania-c         ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/10/18 18:49:07 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "minishell.h"
 
@@ -25,7 +26,7 @@ void	ft_init(t_data *data, char **envp)
 		exit(0);
 	}
 	ft_set_last_status(0);
-	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	ft_get_env(data, envp);
 	data->path = ft_env_path(data);
 	if (data->path)
