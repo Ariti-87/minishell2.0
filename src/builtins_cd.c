@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:51:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/06 10:40:43 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 15:33:07 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,35 @@ void	ft_cd(t_data *data, char **argv)
 		if (!argv[1])
 			ft_cd_home(data, pwd, oldpwd, current);
 		else if (argv[2])
-			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-		else
 		{
-			if ((!chdir(argv[1])) == 0)
-				ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
-			ft_update_pwd(&data->env, pwd, oldpwd, current);
-			ft_update_pwd(&data->export, pwd, oldpwd, current);
+			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
+			ft_return_status(data, 1);
 		}
+		else
+			ft_cd_directory(data, pwd, oldpwd, argv[1]);
 	}
 	else
+	{
 		ft_putstr_fd("Error: cd: \n", 2);
+		ft_return_status(data, 1);
+	}
 }
+void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
+{
+	t_env	*current;
 
+	current = NULL;
+	if ((!chdir(str)) == 0)
+	{
+		ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
+		ft_return_status(data, 1);
+	}
+	else
+	{
+		ft_update_pwd(&data->env, pwd, oldpwd, current);
+		ft_update_pwd(&data->export, pwd, oldpwd, current);
+	}
+}
 void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 {
 	t_env	*tmp;
@@ -51,7 +67,10 @@ void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 		if (!ft_strncmp(tmp->name, "HOME", 5))
 		{
 			if ((!chdir(tmp->var)) == 0)
+			{
 				ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
+				ft_return_status(data, 1);
+			}
 			ft_update_pwd(&data->env, pwd, oldpwd, current);
 			ft_update_pwd(&data->export, pwd, oldpwd, current);
 			break ;
@@ -59,7 +78,10 @@ void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 		tmp = tmp->next;
 	}
 	if (!tmp)
+	{
 		ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
+		ft_return_status(data, 1);
+	}
 }
 
 void	ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current)

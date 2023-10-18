@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:23:57 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/17 11:23:36 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 16:12:38 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,23 @@ void	ft_minishell(t_data *data)
 
 void	ft_execute_minishell(t_data *data, char *line)
 {
-	// (void)line;
-	if (ft_unclosed_quote(line))
-		return ;
-	ft_lexer(data, line);
-	ft_parser(data);
-	if (ft_error_separator(data, data->plist))
-	{
-		ft_free_parsing(data);
-		return ;
-	}
-	data->cmds_nb = ft_cmd_count(data);
+	// if (ft_unclosed_quote(line))
+	// 	return ;
+	// ft_lexer(data, line);
+	// ft_parser(data);
+	// if (ft_error_separator(data, data->plist))
+	// {
+	// 	ft_free_parsing(data);
+	// 	return ;
+	// }
+	// data->cmds_nb = ft_cmd_count(data);
+	data->cmds_nb = 1;
+	data->cmds_exec = line;
 	ft_execute_init(data);
 	// ft_link_exec(data);
-	// ft_heredoc_path(data);
-	// ft_execute(data);
-	ft_free_parsing(data);
+	ft_heredoc_path(data);
+	ft_execute(data);
+	// ft_free_parsing(data);
 }
 
 void	ft_execute_init(t_data *data)
@@ -59,7 +60,6 @@ void	ft_execute_init(t_data *data)
 	int	i;
 
 	i = -1;
-	data->cmds_nb = 2;
 	data->cmds = malloc(sizeof(t_cmd *) * (data->cmds_nb));
 	if (!data->cmds)
 		ft_error_msn("Invalid Malloc struct cmds\n", data);
@@ -72,10 +72,11 @@ void	ft_execute_init(t_data *data)
 	i = -1;
 	while (++i < data->cmds_nb)
 		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
-	data->cmds[0]->eof = "test";
-	data->cmds[0]->cmd = "ls -l";
-	data->cmds[1]->cmd = "wc -l";
-	data->cmds[1]->output_redirec = "file";
+	data->cmds[0]->builtins = data->cmds_exec;
+	// data->cmds[0]->cmd = data->cmds_exec;
+	// data->cmds[1]->builtins = "echo $?";
+	// data->cmds[1]->cmd = "echo hola";
+	// data->cmds[1]->output_redirec = "file";
 	/* i = -1;
 	while (++i < data->cmds_nb)
 		if (data->cmds[i]->cmd[0] == '\0')

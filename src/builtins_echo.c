@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/05 18:24:56 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:52:11 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,16 @@ int	ft_echo_option(char *str)
 	return (0);
 }
 
-void	ft_echo(char **argv)
+void	ft_echo(t_data *data, char **argv)
 {
 	int	i;
-	int	option;
+	int option;
 
+	if (argv[1] && !ft_strncmp("$?", argv[1], 2))
+	{
+		printf("%d\n", ft_get_last_status());
+		return ;
+	}
 	i = 1;
 	if (!argv[1])
 	{
@@ -50,4 +55,5 @@ void	ft_echo(char **argv)
 	}
 	if (!option)
 		printf("\n");
+	ft_return_status(data, EXIT_SUCCESS);
 }
