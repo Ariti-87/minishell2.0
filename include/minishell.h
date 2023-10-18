@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:03:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/16 17:42:32 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 15:31:51 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ typedef struct s_data
 	char			*path;
 	char			**paths;
 	int				cmds_nb;
+	char			*cmds_exec;
 	pid_t			*pid;
 	struct s_token	*tlist;
 	struct s_token	*plist;
@@ -114,7 +115,7 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, char *str);
 void			ft_pwd();
-void			ft_echo(char **argv);
+void			ft_echo(t_data *data, char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
@@ -129,6 +130,7 @@ void			ft_update_list_node(t_data *data, int i, char *name, char *var);
 void			ft_env_alpha_order(t_env **env);
 void			ft_cd(t_data *data, char **argv);
 void			ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current);
+void			ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str);
 void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current);
 
 // Environnment

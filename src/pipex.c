@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:51:47 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 16:10:16 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	ft_exec(t_data *data, int cmd_index)
 			ft_error_msn("Invalid access without PATH\n", data);
 		execve(cmds[0], cmds, 0);
 	}
-	ft_error_msn("execution doesnt work\n", data);
+	ft_error_msn("Error : execve\n", data);
 }
 
 void	ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, int fd_stdout)

@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:18 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/06 10:42:17 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 14:42:02 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ft_exit(t_data *data, char **argv)
 	i = 1;
 	if (!argv[i])
 	{
+		ft_free_tab(data->builtins_tab);
 		ft_close_and_free(data);
 		exit (0);
 	}
@@ -31,6 +32,7 @@ void	ft_exit(t_data *data, char **argv)
 	if (argv[i])
 	{
 		ft_exit_arg(argv[i]);
+		ft_free_tab(data->builtins_tab);
 		ft_close_and_free(data);
 		exit(ft_atoll(argv[i]));
 	}
