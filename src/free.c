@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:30:29 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 13:49:20 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:07:23 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ void	ft_free_list_lexer(t_token **list)
 
 void	ft_free_parsing(t_data *data)
 {
-	if (data->tlist)
-		ft_free_list_lexer(&data->tlist);
-	if (data->plist)
-		ft_free_list_lexer(&data->plist);
+	if (data->token)
+		ft_free_list_lexer(&data->token);
 }

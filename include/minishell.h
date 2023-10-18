@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/07 18:03:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 15:31:51 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:45:29 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,21 @@
 
 enum e_type
 {
-	ALPHANUM,
-	SEPARATOR,
+	WORD = 1,
+	SPACES,
+	PIPE,
+	LESS,
+	GREAT,
+	LESS_LESS,
+	GREAT_GREAT,
+	END,
+};
+
+enum e_quote
+{
+	N_QUOTE,
+	S_QUOTE,
+	D_QUOTES,
 };
 
 typedef struct s_coor
@@ -43,6 +56,7 @@ typedef struct s_token
 	enum e_type		type;
 	char			*str;
 	struct s_token	*next;
+	struct s_token	*prev;
 }		t_token;
 
 typedef struct s_env
@@ -74,8 +88,7 @@ typedef struct s_data
 	int				cmds_nb;
 	char			*cmds_exec;
 	pid_t			*pid;
-	struct s_token	*tlist;
-	struct s_token	*plist;
+	struct s_token	*token;
 	struct s_cmd	**cmds;
 	struct s_env	*env;
 	struct s_env	*export;
@@ -163,17 +176,27 @@ void			ft_return_status(t_data *data, int status);
 // Signal
 void			signal_handler(int signal);
 
-// Lexer
-int				ft_unclosed_quote(char *line);
-int				ft_belong(char *s, char c);
-int				ft_type_token(char c);
-void			ft_lstadd_back_token(t_token **lst, t_token *n);
-t_token			*ft_token(char *str, char quote);
+// Link
+void			ft_link_cmd(t_data *data);
+
+
+
+
+// Lexer D
+//	lexer
 int				ft_cmd_count(t_data *data);
-void			ft_lexer(t_data *data, char *line);
-int				ft_error_separator(t_data *data, t_token *list);
-int				ft_lstsize_token(t_token *list);
-int				ft_same_char(char *str, char c, int len);
+int			ft_lexer(t_data *data, char *line);
+
+// lexer_utils
+int			ft_set_status_quote(int quote, char *line, int i);
+void		ft_add_sep(t_token **token, char *line, int i, int len, int type);
+void		ft_add_word(t_token **token, char *line, int i, int start);
+
+//	lexer_var
+// void		ft_lexer_var(t_token **token);
+
+//	lexer_error
+void		ft_lexer_error(t_token *token);
 
 
 // Parser

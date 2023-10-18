@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 15:14:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:26:15 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:25:33 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,76 +20,75 @@ void	print_lexer(t_token **list)
 	current = *list;
 	while (current)
 	{
-		printf("[%u__%s__]", current->type, current->str);
+		printf("[%u__%s__]\n", current->type, current->str);
 		current = current->next;
 	}
 	printf("\n");
 }
 
-// Determine the type of a token based on a character.
-int	ft_type_token(char c)
+static int	ft_set_sep_type(char *line, int i)
 {
-	if (c == '|' || c == '<' || c == '>')
-		return (SEPARATOR);
-	return (ALPHANUM);
+	if (((line[i] > 8 && line[i] < 14) || line[i] == 32))
+		return (SPACES);
+	else if (line[i] == '|')
+		return (PIPE);
+	else if (line[i] == '<' && line[i + 1] == '<')
+		return (LESS_LESS);
+	else if (line[i] == '>' && line[i + 1] == '>')
+		return (GREAT_GREAT);
+	else if (line[i] == '<')
+		return (LESS);
+	else if (line[i] == '>')
+		return (GREAT);
+	else if (line[i] == '\0')
+		return (END);
+	return (0);
 }
-
-// Add a token to the end of a token list.
-void	ft_lstadd_back_token(t_token **lst, t_token *n)
+//
+static int	ft_token(int *i, char *line, int start, t_data *data)
 {
-	t_token	*r;
+	int	sep_type;
 
-	if (!n)
-		return ;
-	if (!lst || !*lst)
-		*lst = n;
-	else
+	sep_type = ft_set_sep_type(line, (*i));
+	if (sep_type)
 	{
-		r = *lst;
-		while ((*lst)->next)
-			*lst = (*lst)->next;
-		(*lst)->next = n;
-		*lst = r;
+		if ((*i) != 0 && ft_set_sep_type(line, (*i) - 1) == 0)
+			ft_add_word(&data->token, line, (*i), start);
+		if (sep_type == PIPE || sep_type == LESS || sep_type == GREAT
+			|| sep_type == END)
+			ft_add_sep(&data->token, line, (*i), 2,sep_type);
+		else if (sep_type == LESS_LESS || sep_type == GREAT_GREAT)
+		{
+			ft_add_sep(&data->token, line, (*i), 3,sep_type);
+			(*i)++;
+		}
+		start = 1 + (*i);
 	}
+	return (start);
 }
 
-// Create a token structure based on a string and a quote character.
-t_token	*ft_token(char *str, char quote)
+int	ft_lexer(t_data *data, char *line)
 {
-	t_token	*token;
+	int	i;
+	int	quote;
+	int	start;
+	int	end;
 
-	if (!str)
-		return (NULL);
-	token = malloc(sizeof(t_token));
-	if (!token)
-		return (NULL);
-	if (quote)
-		token->type = ALPHANUM;
-	else
-		token->type = ft_type_token(*str);
-	token->str = ft_calloc(2, sizeof(char));
-	if (!token->str)
-		return (NULL);
-	*(token->str) = *str;
-	token->next = NULL;
-	return (token);
-}
-
-// Tokenize an input line and add tokens to a token list, considering quotes.
-void	ft_lexer(t_data *data, char *line)
-{
-	int		i;
-	char	quote;
-
+	end = ft_strlen(line);
+	start = 0;
 	i = 0;
-	quote = 0;
-	while (line && line[i])
+	quote = N_QUOTE;
+	while (i <= end)
 	{
-		if (quote && quote == line[i] && ft_belong("'\"", line[i]))
-			quote = 0;
-		else if (!quote && ft_belong("'\"", line[i]))
-			quote = line[i];
-		ft_lstadd_back_token(&data->tlist, ft_token(&line[i], quote));
+		quote = ft_set_status_quote(quote, line, i);
+		if (quote == N_QUOTE)
+			start = ft_token(&i, line, start, data);
 		i++;
 	}
+	if (quote != N_QUOTE)
+	{
+		ft_putstr_fd("error: unclosed quotes\n", 2);
+		return (1);
+	}
+	return (0);
 }

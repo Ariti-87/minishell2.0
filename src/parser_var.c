@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 17:39:33 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:31:33 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:18:32 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Handle the status code and add it to the string.
+/* // Handle the status code and add it to the string.
 static int	ft_match_status(char **f)
 {
 	*f = ft_strjoin_free(*f, ft_itoa(ft_get_last_status()), 1, 1);
@@ -97,4 +97,4 @@ char	*ft_var_env(t_data *data, char *str)
 	}
 	else
 		return (str);
-}
+} */

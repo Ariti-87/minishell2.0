@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
+#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/16 16:02:04 by arincon           #+#    #+#              #
-#    Updated: 2023/10/17 10:50:19 by arincon          ###   ########.fr        #
+#    Updated: 2023/10/18 17:18:14 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -70,17 +70,13 @@ SRCS		:=				\
 	lexer_utils.c			\
 	signal.c				\
 	status.c				\
-	parser.c				\
 	parser_utils.c			\
-	parser_unclosed.c		\
-	parser_space.c			\
 	parser_quote.c			\
 	parser_quote_utils.c	\
-	parser_quote_clear.c	\
 	parser_var.c			\
 	parser_var_utils.c		\
-	parser_sep.c			\
 	parser_sep_utils.c		\
+	lexer_error.c			\
 	link.c
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)

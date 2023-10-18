@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:03:34 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/12 17:02:58 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:13:39 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Check if there are single or double quotes inside the input string.
+/* // Check if there are single or double quotes inside the input string.
 int	ft_quote_inside(char *str)
 {
 	int	i;
@@ -113,4 +113,4 @@ void	ft_clear_quote(t_data *data)
 			current->str = ft_var_env(data, current->str);
 		current = current->next;
 	}
-}
+} */

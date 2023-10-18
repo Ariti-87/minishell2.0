@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 14:40:49 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:07:47 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,8 @@ void	ft_close_and_free(t_data *data)
 		ft_free_list_env(data->export);
 	if (data->cmds)
 		ft_free_unlink_cmds(data);
-	if (data->tlist)
-		ft_free_list_lexer(&data->tlist);
-	if (data->plist)
-		ft_free_list_lexer(&data->plist);
+	if (data->token)
+		ft_free_list_lexer(&data->token);
 }
 
 // Waits for child processes to finish.

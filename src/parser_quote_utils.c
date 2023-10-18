@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_quote_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 12:07:08 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:32:23 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:13:52 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Clear quotes from a single string.
+/* // Clear quotes from a single string.
 char	*ft_clear_word(char *str)
 {
 	char	*final;
@@ -98,4 +98,4 @@ char	*ft_add_char(char *str, char c)
 	if (str)
 		free(str);
 	return (str2);
-}
+} */

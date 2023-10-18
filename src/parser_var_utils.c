@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_var_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 15:31:25 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:31:45 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 17:18:37 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Modify variables in an array of strings
+/* // Modify variables in an array of strings
 void	ft_modif_var_env(t_data *data, char **tab)
 {
 	int		i;
@@ -29,4 +29,4 @@ void	ft_modif_var_env(t_data *data, char **tab)
 		}
 		i++;
 	}
-}
+} */

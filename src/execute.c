@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 12:23:57 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 16:12:38 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/18 18:42:34 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,18 @@ void	ft_minishell(t_data *data)
 
 void	ft_execute_minishell(t_data *data, char *line)
 {
-	// if (ft_unclosed_quote(line))
-	// 	return ;
-	// ft_lexer(data, line);
-	// ft_parser(data);
-	// if (ft_error_separator(data, data->plist))
-	// {
-	// 	ft_free_parsing(data);
-	// 	return ;
-	// }
-	// data->cmds_nb = ft_cmd_count(data);
-	data->cmds_nb = 1;
-	data->cmds_exec = line;
+	ft_lexer(data, line);
+	ft_lexer_error(data->token);
+
+
+	data->cmds_nb = ft_cmd_count(data);
+	// data->cmds_exec = line;
+	print_lexer(&data->token);
 	ft_execute_init(data);
-	// ft_link_exec(data);
+	ft_link_cmd(data);
 	ft_heredoc_path(data);
 	ft_execute(data);
-	// ft_free_parsing(data);
+	ft_free_parsing(data);
 }
 
 void	ft_execute_init(t_data *data)
@@ -72,7 +67,7 @@ void	ft_execute_init(t_data *data)
 	i = -1;
 	while (++i < data->cmds_nb)
 		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
-	data->cmds[0]->builtins = data->cmds_exec;
+	// data->cmds[0]->builtins = data->cmds_exec;
 	// data->cmds[0]->cmd = data->cmds_exec;
 	// data->cmds[1]->builtins = "echo $?";
 	// data->cmds[1]->cmd = "echo hola";
