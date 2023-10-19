@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 16:10:16 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 16:47:16 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 			(ft_builtins(data, data->cmds[cmd_index]->builtins), exit(0));
 		if (data->cmds[cmd_index]->cmd)
 			ft_exec(data, cmd_index);
+		exit(0);
 	}
 	if (cmd_index)
 	{

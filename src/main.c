@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 10:38:03 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:08:32 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,11 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-// signal
-// gerer $? apres chaque builtins avec return_status
-// parsing
+// parser quitar las " " ' '
+// parser no debe haber error " | > " o " | < "
 
-/*
-Tricky case:
-ls |
-| ls
-*/
+// signal
+
+// varios heredoc en la misma cmd
+// $? con status
+

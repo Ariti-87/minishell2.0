@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 14:11:52 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:36:08 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,12 @@ void	ft_execute_minishell(t_data *data, char *line)
 	}
 	ft_parser(&data->token);
 	ft_expansion_var(&data->token);
-
-	// data->cmds_exec = line;
-	print_lexer(&data->token);
+	// print_lexer(&data->token);
 	ft_execute_init(data);
-	// ft_link_cmd(data);
-	// ft_heredoc_path(data);
-	// ft_execute(data);
+	ft_link_cmd(data);
+	ft_heredoc_path(data);
 	ft_free_parsing(data);
+	ft_execute(data);
 }
 
 void	ft_execute_init(t_data *data)
@@ -66,7 +64,7 @@ void	ft_execute_init(t_data *data)
 		ft_error_msn("Invalid Malloc struct cmds\n", data);
 	while (++i < data->cmds_nb)
 	{
-		data->cmds[i] = malloc(sizeof(t_cmd));
+ 		data->cmds[i] = malloc(sizeof(t_cmd));
 		if (!data->cmds[i])
 			ft_error_msn("Invalid Malloc struct cmds\n", data);
 	}
@@ -91,7 +89,8 @@ void	ft_execute(t_data *data)
 
 	ft_pid_init(data);
 	i = -1;
-	if (data->cmds_nb == 1 && data->cmds[0]->builtins)
+	if (data->cmds_nb == 1 && data->cmds[0]->builtins && !data->cmds[0]->input_redirec
+			&& !data->cmds[0]->output_redirec && !data->cmds[0]->eof)
 		ft_builtins(data, data->cmds[0]->builtins);
 	else
 	{

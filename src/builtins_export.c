@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/06 11:05:22 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 17:43:57 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	ft_export_for_norm(t_data *data, char **argv, int i)
 		*equal = '\0';
 		name = argv[i];
 		var = equal + 1;
+		ft_update_list_node(data, 0, name, var);
 	}
 	else
 	{
 		name = argv[i];
 		var = "";
 	}
-	ft_update_list_node(data, 0, name, var);
 	ft_update_list_node(data, 1, name, var);
 }
 

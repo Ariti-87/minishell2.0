@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 13:15:00 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:42:57 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum e_type
 	GREAT_GREAT,
 	INPUT,
 	OUTPUT,
+	HEREDOC,
 	END,
 };
 
@@ -47,12 +48,6 @@ enum e_quote
 	S_QUOTE,
 	D_QUOTES,
 };
-
-typedef struct s_coor
-{
-	int	i;
-	int	j;
-}		t_coor;
 
 typedef struct s_token
 {
