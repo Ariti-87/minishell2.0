@@ -6,7 +6,7 @@
 #    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/19 12:12:13 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/19 17:19:32 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,14 +71,12 @@ SRCS		:=				\
 	lexer_utils.c			\
 	signal.c				\
 	status.c				\
-	parser_utils.c			\
 	parser_quote.c			\
-	parser_quote_utils.c	\
 	parser_var.c			\
 	parser_var_utils.c		\
-	parser_sep_utils.c		\
 	parser_error.c			\
 	expansion_var.c			\
+	expansion_utils.c		\
 	parser.c				\
 	link.c
 

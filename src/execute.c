@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 17:36:08 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 18:25:45 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,13 @@ void	ft_minishell(t_data *data)
 void	ft_execute_minishell(t_data *data, char *line)
 {
 	ft_lexer(data, line);
-	if (ft_parser_error(data->token) != 0)
+
+	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
 		return ; // Buscar la mejor manera de salir (2)
 	}
-	ft_parser(&data->token);
-	ft_expansion_var(&data->token);
-	// print_lexer(&data->token);
+	print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link_cmd(data);
 	ft_heredoc_path(data);

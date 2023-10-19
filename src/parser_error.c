@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:05:22 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 16:04:14 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 18:26:04 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	ft_set_io(t_token *token)
 static bool	ft_check_sep_parser(t_token *token)
 {
 	if (token->type == PIPE && (token->next->type == END
-		|| token->next->type == PIPE || token->next->type != WORD))
+		|| token->next->type == PIPE))
 		return (true);
 	else if (token->type == GREAT && (token->next->type == END
 		|| token->next->type == PIPE || token->next->type != WORD))

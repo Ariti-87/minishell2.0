@@ -1,39 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expansion_var.c                                    :+:      :+:    :+:   */
+/*   expansion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 17:05:05 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:05:09 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-void	ft_expansion_var(t_data *data)
+int	ft_update_quote(char c, int qoute)
 {
-	t_token	*temp;
-	int		i;
-	int		quote;
+	if (c == '\'' && qoute == N_QUOTE)
+		qoute = S_QUOTE;
+	else if (c == '\"' && qoute == N_QUOTE)
+		qoute = D_QUOTES;
+	else if (c == '\'' && qoute == S_QUOTE)
+		qoute = N_QUOTE;
+	else if (c == '\"' && qoute == D_QUOTES)
+		qoute = N_QUOTE;
+	return (qoute);
+}
 
-	quote = N_QUOTE;
-	temp = data->token;
-	while (temp)
+bool	ft_next_sep(char c)
+{
+	if (c == '$' || c == ' ' || c == '=' || c == '\0')
+		return (true);
+	else
+		return (false);
+}
+
+bool	ft_between_quotes(char *str, int i)
+{
+	if (i > 0)
 	{
-		i = 0;
-		while (temp->str[i])
-		{
-			quote = ft_update_quote(temp->str[i], quote);
-			if (temp->str[i] == '$'
-				&& ft_next_sep(temp->str[i + 1] == false)
-				&& ft_between_quotes(temp->str, i) == false
-				&& (quote == N_QUOTE || quote == D_QUOTES))
-				temp->str[i] = '1';
-			i++;
-		}
-		temp = temp->next;
+		if (str[i - 1] == '\"' && str[i + 1] == '\"')
+			return (true);
+		else
+			return (false);
 	}
+	return (false);
 }

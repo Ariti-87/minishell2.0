@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 12:57:54 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 18:14:09 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,27 @@ static char	*ft_token_join(char const *s1, char const *s2)
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
+	free((void *)s1);
 	return (str);
 }
 
-static void	ft_del_list(t_token *to_delete)
+static void	ft_del_list(t_token *current)
 {
-	to_delete->prev->next = to_delete->next;
-	if (to_delete->next)
-		to_delete->next->prev = to_delete->prev;
-	free(to_delete);
+	current->prev->next = current->next;
+	if (current->next)
+		current->next->prev = current->prev;
+	free(current);
 }
 
-void	ft_parser(t_token **token)
+static void	ft_word_join(t_token *token)
 {
 	t_token	*current;
 	t_token	*start;
+	t_token *aux;
 	int		status;
 
 	status = false;
-	current = *token;
+	current = token;
 	while (current)
 	{
 		if (current->type == WORD && status == false)
@@ -63,12 +65,25 @@ void	ft_parser(t_token **token)
 		}
 		else if (current->type == WORD && status == true)
 		{
+			aux = current->prev;
 			start->str = ft_token_join(start->str, current->str);
 			ft_del_list(current);
+			current = aux;
 		}
-		if (current->type == PIPE)
+		else if (current->type == PIPE)
 			status = false;
 		current = current->next;
 	}
-	return ;
+}
+
+
+int	ft_parser(t_data *data)
+{
+	if (ft_parser_error(data->token) != 0)
+		return (2);
+	ft_word_join(data->token);
+	ft_expansion_var(data);
+
+	// ft_clear_quotes(*token);
+	return (0);
 }
