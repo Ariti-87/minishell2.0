@@ -6,7 +6,7 @@
 #    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/19 12:12:13 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/19 16:52:13 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,6 +79,7 @@ SRCS		:=				\
 	parser_sep_utils.c		\
 	parser_error.c			\
 	expansion_var.c			\
+	expansion_utils.c		\
 	parser.c				\
 	link.c
 

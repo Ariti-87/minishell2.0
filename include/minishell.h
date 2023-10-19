@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 13:15:00 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:05:54 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ enum e_type
 	GREAT_GREAT,
 	INPUT,
 	OUTPUT,
+	HEREDOC,
 	END,
 };
 
@@ -190,12 +191,11 @@ int				ft_set_status_quote(int quote, char *line, int i);
 void			ft_add_sep(t_token **token, char *line, int i, int len, int type);
 void			ft_add_word(t_token **token, char *line, int i, int start);
 
+// Parser
+int			ft_parser(t_data *data);
+
 //	Parser_error
 int				ft_parser_error(t_token *token);
-
-// Parser
-void			ft_parser(t_token **token);
-
 
 void			ft_parser_list(t_data *data);
 t_token			*ft_tokenize(int next_gr, t_token *nlist);
@@ -205,8 +205,12 @@ void			ft_parser_redirec(t_data *data, t_token *list);
 int				ft_cmd_count(t_data *data);
 
 //	Expansion_var
-void			ft_expansion_var(t_token **token);
+void	ft_expansion_var(t_data *data);
 
+//	Expansion_utils
+int	ft_update_quote(char c, int qoute);
+bool	ft_next_sep(char c);
+bool	ft_between_quotes(char *str, int i);
 
 
 

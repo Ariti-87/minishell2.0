@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 13:10:17 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:21:12 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,12 @@ void	ft_minishell(t_data *data)
 void	ft_execute_minishell(t_data *data, char *line)
 {
 	ft_lexer(data, line);
-	if (ft_parser_error(data->token) != 0)
+
+	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
 		return ; // Buscar la mejor manera de salir (2)
 	}
-	ft_parser(&data->token);
-	ft_expansion_var(&data->token);
 
 	data->cmds_nb = ft_cmd_count(data);
 	// data->cmds_exec = line;

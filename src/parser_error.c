@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:05:22 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 13:19:56 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 16:04:33 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ static void	ft_set_io(t_token *token)
 {
 	if (token->type == LESS)
 		token->next->type = INPUT;
+	else if (token->type == LESS_LESS)
+		token->next->type = HEREDOC;
 	else if (token->type == GREAT || token->type == GREAT_GREAT)
 		token->next->type = OUTPUT;
 }
@@ -23,7 +25,7 @@ static void	ft_set_io(t_token *token)
 static bool	ft_check_sep_parser(t_token *token)
 {
 	if (token->type == PIPE && (token->next->type == END
-		|| token->next->type == PIPE || token->next->type != WORD))
+		|| token->next->type == PIPE))
 		return (true);
 	else if (token->type == GREAT && (token->next->type == END
 		|| token->next->type == PIPE || token->next->type != WORD))
