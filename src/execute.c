@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 11:58:05 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/19 14:11:52 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,20 @@ void	ft_minishell(t_data *data)
 void	ft_execute_minishell(t_data *data, char *line)
 {
 	ft_lexer(data, line);
-	ft_lexer_error(data->token);
-
+	if (ft_parser_error(data->token) != 0)
+	{
+		ft_free_parsing(data);
+		return ; // Buscar la mejor manera de salir (2)
+	}
+	ft_parser(&data->token);
+	ft_expansion_var(&data->token);
 
 	// data->cmds_exec = line;
 	print_lexer(&data->token);
 	ft_execute_init(data);
-	ft_link_cmd(data);
-	ft_heredoc_path(data);
-	ft_execute(data);
+	// ft_link_cmd(data);
+	// ft_heredoc_path(data);
+	// ft_execute(data);
 	ft_free_parsing(data);
 }
 

@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_error.c                                      :+:      :+:    :+:   */
+/*   parser_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 17:05:22 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/18 17:05:24 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 13:19:56 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	ft_check_sep_lexer(t_token *token)
+static void	ft_set_io(t_token *token)
+{
+	if (token->type == LESS)
+		token->next->type = INPUT;
+	else if (token->type == GREAT || token->type == GREAT_GREAT)
+		token->next->type = OUTPUT;
+}
+
+static bool	ft_check_sep_parser(t_token *token)
 {
 	if (token->type == PIPE && (token->next->type == END
 		|| token->next->type == PIPE || token->next->type != WORD))
@@ -32,7 +40,7 @@ bool	ft_check_sep_lexer(t_token *token)
 	return (false);
 }
 
-void	ft_lexer_error(t_token *token)
+int	ft_parser_error(t_token *token)
 {
 	t_token	*temp;
 
@@ -40,16 +48,17 @@ void	ft_lexer_error(t_token *token)
 	if (temp->type == PIPE)
 	{
 			ft_putstr_fd("syntax error near unexpected token\n", 2);
-			return ;
+			return (2);
 	}
 	while (temp)
 	{
-		if (ft_check_sep_lexer(temp) == true)
+		if (ft_check_sep_parser(temp) == true)
 		{
 			ft_putstr_fd("syntax error near unexpected token\n", 2);
-			return ;
+			return (2);
 		}
+		ft_set_io(temp);
 		temp = temp->next;
 	}
-	return ;
+	return (0);
 }
