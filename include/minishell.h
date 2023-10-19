@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 17:05:54 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 17:18:48 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ void			ft_execute_init(t_data *data);
 void			ft_free_cmds(t_data *data);
 void			ft_free_unlink_cmds(t_data *data);
 char			**ft_env_exec(t_data *data);
+int				ft_cmd_count(t_data *data);
 
 // Status
 void			ft_set_last_status(int status);
@@ -185,32 +186,19 @@ void			ft_link_cmd(t_data *data);
 
 //	Lexer
 int				ft_lexer(t_data *data, char *line);
-
-// Lexer_utils
 int				ft_set_status_quote(int quote, char *line, int i);
 void			ft_add_sep(t_token **token, char *line, int i, int len, int type);
 void			ft_add_word(t_token **token, char *line, int i, int start);
 
 // Parser
-int			ft_parser(t_data *data);
-
-//	Parser_error
+int				ft_parser(t_data *data);
 int				ft_parser_error(t_token *token);
 
-void			ft_parser_list(t_data *data);
-t_token			*ft_tokenize(int next_gr, t_token *nlist);
-char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
-void			ft_clear_space(t_data *data, t_token *list);
-void			ft_parser_redirec(t_data *data, t_token *list);
-int				ft_cmd_count(t_data *data);
-
 //	Expansion_var
-void	ft_expansion_var(t_data *data);
-
-//	Expansion_utils
-int	ft_update_quote(char c, int qoute);
-bool	ft_next_sep(char c);
-bool	ft_between_quotes(char *str, int i);
+void			ft_expansion_var(t_data *data);
+int				ft_update_quote(char c, int qoute);
+bool			ft_next_sep(char c);
+bool			ft_between_quotes(char *str, int i);
 
 
 
