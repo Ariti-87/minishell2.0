@@ -6,7 +6,7 @@
 #    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/18 18:47:56 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/19 12:12:13 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,7 +77,9 @@ SRCS		:=				\
 	parser_var.c			\
 	parser_var_utils.c		\
 	parser_sep_utils.c		\
-	lexer_error.c			\
+	parser_error.c			\
+	expansion_var.c			\
+	parser.c				\
 	link.c
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
