@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/18 18:49:07 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:09:37 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_init(t_data *data, char **envp)
 		exit(0);
 	}
 	ft_set_last_status(0);
-	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	ft_get_env(data, envp);
 	data->path = ft_env_path(data);
 	if (data->path)

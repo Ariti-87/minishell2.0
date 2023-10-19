@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   link.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:14:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 18:41:07 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:20:38 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*ft_strjoin_mini(char const *s1, char const *s2)
+{
+	char	*str;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc(sizeof(*str) * (ft_strlen(s1) + ft_strlen(s2) + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i++] = ' ';
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = '\0';
+	return (str);
+}
 
 static int	ft_isbuiltins(char *str)
 {
@@ -52,20 +78,22 @@ void	ft_link_cmd(t_data *data)
 
 	cmd_index = 0;
 	current = data->token;
-	while (current)
+	while (current && current->type)
 	{
 		while (current && current->type != PIPE)
 		{
-			if (current->type == WORD)
+			if (current && current->type == WORD)
 			{
 				if (ft_isbuiltins(current->str))
 				{
-					data->cmds[cmd_index]->builtins = ft_strjoin(current->str, current->next->str);
+					data->cmds[cmd_index]->builtins = ft_strjoin_mini(current->str, current->next->str);
 					current = current->next;
 				}
 				else
-					data->cmds[cmd_index]->cmd = ft_strdup(current->str);
-				current = current->next;
+				{
+					data->cmds[cmd_index]->cmd = ft_strjoin_mini(current->str, current->next->str);
+					current = current->next;
+				}
 			}
 			if (current && (current->type == LESS || current->type == LESS_LESS
 				|| current->type == GREAT || current->type == GREAT_GREAT))
@@ -73,9 +101,11 @@ void	ft_link_cmd(t_data *data)
 
 				ft_link_sep(data, current, cmd_index);
 				current = current->next;
-				current = current->next;
 			}
+			current = current->next;
 		}
 		cmd_index++;
+		if (current && current->type == PIPE)
+			current = current->next;
 	}
 }

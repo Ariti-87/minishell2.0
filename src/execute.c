@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/18 18:47:34 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/19 11:58:05 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void	ft_execute_minishell(t_data *data, char *line)
 	ft_lexer_error(data->token);
 
 
-	data->cmds_nb = ft_cmd_count(data);
 	// data->cmds_exec = line;
 	print_lexer(&data->token);
 	ft_execute_init(data);
@@ -56,6 +55,7 @@ void	ft_execute_init(t_data *data)
 	int	i;
 
 	i = -1;
+	data->cmds_nb = ft_cmd_count(data);
 	data->cmds = malloc(sizeof(t_cmd *) * (data->cmds_nb));
 	if (!data->cmds)
 		ft_error_msn("Invalid Malloc struct cmds\n", data);
@@ -68,6 +68,7 @@ void	ft_execute_init(t_data *data)
 	i = -1;
 	while (++i < data->cmds_nb)
 		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
+}
 	// data->cmds[0]->builtins = data->cmds_exec;
 	// data->cmds[0]->cmd = data->cmds_exec;
 	// data->cmds[1]->builtins = "echo $?";
@@ -77,7 +78,6 @@ void	ft_execute_init(t_data *data)
 	while (++i < data->cmds_nb)
 		if (data->cmds[i]->cmd[0] == '\0')
 			data->cmds[i]->cmd = " "; */
-}
 
 void	ft_execute(t_data *data)
 {
