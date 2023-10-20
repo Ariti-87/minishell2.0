@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:38:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/19 18:21:35 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/20 12:42:13 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,11 @@ void	ft_free_cmds(t_data *data)
 	{
 		if (data->cmds[i]->heredoc_path)
 		{
+			printf("%s\n", data->cmds[i]->heredoc_path);
+			if (unlink(data->cmds[i]->heredoc_path) != 0)
+				printf("heredoc%d failed to delete\n", i);
 			free(data->cmds[i]->heredoc_path);
 			data->cmds[i]->heredoc_path = NULL;
-			unlink(data->cmds[i]->heredoc_path);
 		}
 		if (data->cmds[i]->cmd)
 			free(data->cmds[i]->cmd);

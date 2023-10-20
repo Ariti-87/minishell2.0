@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 18:20:45 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/20 10:45:08 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void			ft_insert_sorted(t_env **env, t_env *new_node);
 
 // Here_doc
 void			ft_heredoc_path(t_data *data);
-int				ft_heredoc_create(t_data *data, int i, char *file_name);
+void			ft_heredoc_create(t_data *data, int i, char *file_name);
 
 // Execution
 void			ft_minishell(t_data *data);

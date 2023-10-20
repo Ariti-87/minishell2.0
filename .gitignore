@@ -21,3 +21,6 @@
 
 # Precompiled header
 *.gch
+
+# Exec
+minishell

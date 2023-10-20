@@ -3,161 +3,132 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/19 17:19:32 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/20 13:17:42 by arincon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 
 NAME		:= minishell
 
-#---------------------------------------------------#
-#	INGREDIENTS										#
-#---------------------------------------------------#
-# LIBS			libraries to be used
-# LIBS_TARGET	libraries to be built
-#
-# INCS			header file locations
-#
-# SRC_DIR		source directory
-# SRCS			source files
-#
-# BUILD_DIR		build directory
-# OBJS			object files
-# DEPS			dependency files
-#
-# CC			compiler
-# CFLAGS		compiler flags
-# CPPFLAGS		preprocessor flags
-# LDFLAGS		linker flags
-# LDLIBS		libraries name
+#DIRECTORIES_________________________________________________________
 
-LIBS		:= ft gnl
-LIBS_TARGET	:=				\
-	lib/libft/libft.a		\
-	lib/libgnl/libgnl.a
+LIBS		:=	ft gnl
+LIBS_TARGET	:=							\
+				lib/libft/libft.a		\
+				lib/libgnl/libgnl.a
 
-INCS		:=	include		\
-	lib/libft/include		\
-	lib/libgnl/include
+INCS		:=	include					\
+				lib/libft/include		\
+				lib/libgnl/include
+
+#SOURCES______________________________________________________________
 
 SRC_DIR		:= src
-SRCS		:=				\
-	main.c					\
-	utils.c					\
-	utils2.c				\
-	free.c					\
-	pipex.c					\
-	pipex_open.c			\
-	pipex_utils.c			\
-	init.c					\
-	here_doc.c				\
-	builtins_cd.c			\
-	builtins_echo.c			\
-	builtins_env.c			\
-	builtins_exit.c			\
-	builtins_export.c		\
-	builtins_pwd.c			\
-	builtins_unset.c		\
-	builtins.c				\
-	env.c					\
-	env_exec.c				\
-	env_utils.c				\
-	execute.c				\
-	execute_utils.c			\
-	lexer.c					\
-	lexer_utils.c			\
-	signal.c				\
-	status.c				\
-	parser_quote.c			\
-	parser_var.c			\
-	parser_var_utils.c		\
-	parser_error.c			\
-	expansion_var.c			\
-	expansion_utils.c		\
-	parser.c				\
-	link.c
+SRCS		:=	main.c							\
+				builtins/builtins_cd.c			\
+				builtins/builtins_echo.c		\
+				builtins/builtins_env.c			\
+				builtins/builtins_exit.c		\
+				builtins/builtins_export.c		\
+				builtins/builtins_pwd.c			\
+				builtins/builtins_unset.c		\
+				builtins/builtins.c				\
+				env/env_exec.c					\
+				env/env_utils.c					\
+				env/env.c						\
+				execute/execute_utils.c			\
+				execute/execute.c				\
+				execute/pipex.c					\
+				execute/pipex_open.c			\
+				execute/pipex_utils.c			\
+				execute/here_doc.c				\
+				execute/link.c					\
+				parser/expansion_utils.c		\
+				parser/expansion_var.c			\
+				parser/parser_error.c			\
+				parser/parser_quote.c			\
+				parser/parser_var.c				\
+				parser/parser_var_utils.c		\
+				parser/parser.c					\
+				lexer/lexer.c					\
+				lexer/lexer_utils.c				\
+				utils/free.c					\
+				utils/init.c					\
+				utils/signal.c					\
+				utils/status.c					\
+				utils/utils.c					\
+				utils/utils2.c					\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
+#OBJECT______________________________________________________________
+
 BUILD_DIR	:= .build
 OBJS		:= $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
-DEPS		:= $(OBJS:.o=.d)
+
+#FLAGS_______________________________________________________________
 
 CC			:= cc
 CFLAGS		:= -Wall -Wextra -Werror -g
-# -I lib/libft/include -L lib/libft -l libft
 CPPFLAGS	:= $(addprefix -I,$(INCS)) -MMD -MP
 LDFLAGS		:= $(addprefix -L,$(dir $(LIBS_TARGET)))
 LDLIBS		:= $(addprefix -l,$(LIBS))
-LMLX		:= -lreadline
-
-#---------------------------------------------------#
-#	UTENSILS										#
-#---------------------------------------------------#
-# RM		force remove
-# MAKEFLAGS	make flags
-# DIR_DUP	duplicate directory tree
-
+READ		:= -lreadline
 RM			:= rm -f
-
 MAKEFLAGS   += --no-print-directory
-
 DIR_DUP		= mkdir -p $(@D)
 
-#---------------------------------------------------#
-#	RECIPES											#
-#---------------------------------------------------#
-# all		default goal
-# $(NAME)	link .o -> archive
-# $(LIBS)	build libraries
-# %.o		compilation .c -> .o
-# clean		remove .o
-# fclean	remove .o + binary
-# re		remake default goal
-# run		run the program
-# info		print the default goal recipe
+#COLORS______________________________________________________________
+
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+WHITE	=	\033[0;97m
+RESET	=	\033[0m
+YELLOW 	=	\033[0;93m
+
+#MAIN_RULE___________________________________________________________
 
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBS_TARGET)
-	$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) $(LMLX) -o $(NAME)
-	$(info CREATED $(NAME))
+	@echo -n "$(YELLOW)Compiling	${WHITE}→	$(YELLOW)$(NAME)$(RESET) "
+	@echo "$(GREEN)[ok]✓$(RESET)"
+	@$(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) $(READ) -o $(NAME)
+#	$(info CREATED $(NAME))
 
-$(LIBS_TARGET):
-	$(MAKE) -C $(@D)
+#OBJECT_RULE_________________________________________________________
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	$(info CREATED $@)
+#	$(info CREATED $@)
 
--include $(DEPS)
+#LIBFT_RULE__________________________________________________________
+
+$(LIBS_TARGET):
+	$(MAKE) -C $(@D)
+
+#CLEAN_RULE__________________________________________________________
 
 clean:
+	@echo -n "$(RED)Deleting	${WHITE}→	$(RED)$(NAME) object$(RESET) "
+	$(RM) $(OBJS)
+	@echo "$(GREEN)[ok]$(RED)✗$(RESET)"
 	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f clean; done
-	$(RM) $(OBJS) $(DEPS)
 
 fclean: clean
-	for f in $(strip(dir $(LIBS_TARGET))); do $(MAKE) -C $$f fclean; done
+	@echo -n "$(RED)Deleting	${WHITE}→	$(RED)$(NAME) executable$(RESET) "
 	$(RM) $(NAME)
+	@echo "$(GREEN)[ok]$(RED)✗$(RESET)"
+	for f in $(dir $(LIBS_TARGET)); do $(MAKE) -C $$f fclean; done
 
-re:
-	$(MAKE) fclean
-	$(MAKE) all
+re: fclean all
 
-info-%:
-	$(MAKE) --dry-run --always-make $* | grep -v "info"
-
-gdb:
-	$(MAKE) all
-	gdb ./$(NAME)
-
-#---------------------------------------------------#
-#	SPEC											#
-#---------------------------------------------------#
+#SPEC_______________________________________________________________
 
 .PHONY: clean fclean re
 .SILENT:
+

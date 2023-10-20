@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/01 15:05:36 by arincon           #+#    #+#             */
-/*   Updated: 2023/04/04 14:54:29 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/20 12:46:16 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int	ft_len(long int n)
 	return (i);
 }
 
-char	*ft_itoa(int n)
+/* char	*ft_itoa(int n)
 {
 	char		*str;
 	int			len;
@@ -58,7 +58,7 @@ char	*ft_itoa(int n)
 		len--;
 	}
 	return (str);
-}
+} */
 
 char	*ft_utoa(unsigned int n)
 {

@@ -6,7 +6,7 @@
 #    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/18 17:28:18 by arincon           #+#    #+#              #
-#    Updated: 2023/04/04 14:54:27 by arincon          ###   ########.fr        #
+#    Updated: 2023/10/20 13:12:33 by arincon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,30 +116,45 @@ DIR_DUP		= mkdir -p $(@D)
 #	recipe line 2
 #	…
 
+#COLORS______________________________________________________________
+
+GREEN	=	\033[0;32m
+RED		=	\033[0;31m
+WHITE	=	\033[0;97m
+RESET	=	\033[0m
+YELLOW 	=	\033[0;93m
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(AR) $(ARFLAGS) $(NAME) $(OBJS)
-	$(info CREATED $(NAME))
+	@echo -n "$(YELLOW)Compiling	${WHITE}→	$(YELLOW)$(NAME)$(RESET) "
+	@$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+	@echo "$(GREEN)[ok]✓$(RESET)"
+#	$(info CREATED $(NAME))
 # info is like echo, echo works only inside a recipe, info anywhere
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	$(DIR_DUP)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
-	$(info CREATED $@)
+#	$(info CREATED $@)
 # $@ = current target | $^ = all prerequisites | $< leftmost prerequisites
 
 -include $(DEPS)
 
 clean:
+	@echo -n "$(RED)Deleting	${WHITE}→	$(RED)$(NAME) object$(RESET) "
 	$(RM) $(OBJS) $(DEPS)
+	@echo "$(GREEN)[ok]$(RED)✗$(RESET)"
 # mostlyclean: (More GNU conventional)
 
-fclean: clean
+fclean:
+	@echo -n "$(RED)Deleting	${WHITE}→	$(RED)$(NAME) executable$(RESET) "
 	$(RM) $(NAME)
+	@echo "$(GREEN)[ok]$(RED)✗$(RESET)"
 # clean: (More GNU conventional)
 
 re:
+	$(MAKE) clean
 	$(MAKE) fclean
 	$(MAKE) all
 # external call, don't rely on re: fclean all

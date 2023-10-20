@@ -6,18 +6,18 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:55:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/17 11:02:15 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/20 10:56:08 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_heredoc_create(t_data *data, int i, char *file_name)
+void	ft_heredoc_create(t_data *data, int i, char *file_name)
 {
 	int		fd;
 	char	*buf;
 
-	fd = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 00777);
+	fd = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 	if (fd < 0)
 		ft_error_msn("An error occured with open of here_doc\n", data);
 	while (1)
@@ -38,7 +38,7 @@ int	ft_heredoc_create(t_data *data, int i, char *file_name)
 		}
 		free(buf);
 	}
-	return (close(fd), fd);
+	close(fd);
 }
 
 void	ft_heredoc_path(t_data *data)
@@ -57,6 +57,7 @@ void	ft_heredoc_path(t_data *data)
 			data->cmds[i]->heredoc_path
 				= ft_strjoin_gnl(".build/.heredoc", tmp);
 			free(tmp);
+			printf("%s\n", data->cmds[i]->heredoc_path);
 			if (!data->cmds[i]->heredoc_path)
 				ft_error_msn("Invalid Malloc here_doc path\n", data);
 			j++;
