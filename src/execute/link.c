@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:14:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/19 16:33:51 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/20 15:31:58 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 static int	ft_isbuiltins(char *str)
 {
-	if (!ft_strncmp(str, "echo", 5) || !ft_strncmp(str, "echo ", 5))
+	// char **tab;
+
+	// tab = ft_split(str, ' ');
+	if (!ft_strncmp(str, "echo", 5) || !ft_strncmp(str, "echo ", 5) )
 		return (1);
 	if (!ft_strncmp(str, "exit", 5) || !ft_strncmp(str, "exit ", 5))
 		return (1);

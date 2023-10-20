@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 18:27:22 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/20 16:59:06 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_execute_minishell(t_data *data, char *line)
 		ft_free_parsing(data);
 		return ; // Buscar la mejor manera de salir (2)
 	}
-	print_lexer(&data->token);
+	// print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link_cmd(data);
 	ft_heredoc_path(data);
@@ -71,15 +71,6 @@ void	ft_execute_init(t_data *data)
 	while (++i < data->cmds_nb)
 		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
 }
-	// data->cmds[0]->builtins = data->cmds_exec;
-	// data->cmds[0]->cmd = data->cmds_exec;
-	// data->cmds[1]->builtins = "echo $?";
-	// data->cmds[1]->cmd = "echo hola";
-	// data->cmds[1]->output_redirec = "file";
-	/* i = -1;
-	while (++i < data->cmds_nb)
-		if (data->cmds[i]->cmd[0] == '\0')
-			data->cmds[i]->cmd = " "; */
 
 void	ft_execute(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/20 10:45:08 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/20 17:55:46 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void			ft_free_token(t_token **token);
 void			ft_free_list_lexer(t_token **list);
 void			ft_free_parsing(t_data *data);
 char			*ft_strstr(char *str, char *to_find);
+char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 int				ft_strcmp(const char *s1, const char *s2);
 long int		ft_atol(const char *nptr);
 long long int	ft_atoll(const char *nptr);
@@ -114,7 +115,7 @@ pid_t			ft_fork(t_data *data, int cmd_index);
 void 			ft_dup2(t_data *data, int cmd_index);
 void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
 void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
-void 			ft_exec(t_data *data, int cmd_index);
+void 			ft_execve(t_data *data, int cmd_index);
 int				ft_open_stdin(t_data *data, int cmd_index);
 int				ft_open_stdout(t_data *data, int cmd_index);
 void			ft_waitpid(t_data *data);

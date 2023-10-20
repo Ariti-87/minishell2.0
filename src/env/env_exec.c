@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:53:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/06 11:06:56 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/20 17:07:36 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_env_exec(t_data *data)
 
 	current = data->env;
 	env_size = 0;
-	i = -1;
+	i = 0;
 	while (current)
 	{
 		env_size++;
@@ -33,9 +33,10 @@ char	**ft_env_exec(t_data *data)
 	current = data->env;
 	while (current)
 	{
-		envp[++i] = ft_strjoin_gnl(current->name, "=");
-		envp[i] = ft_strjoin_gnl(envp[i], current->var);
+		envp[i] = ft_strjoin_gnl(current->name, "=");
+		envp[i] = ft_strjoin_free(envp[i], current->var, 1, 0);
 		current = current->next;
+		i++;
 	}
 	envp[i] = NULL;
 	return (envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 17:07:47 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/20 18:12:18 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,10 @@ void	ft_close_pipes(t_data *data)
 // Closes pipes, frees allocated memory
 void	ft_close_and_free(t_data *data)
 {
+	// if (data->builtins_tab)
+	// 	ft_free_tab(data->builtins_tab);
 	if (data->paths)
 		ft_free_tab(data->paths);
-	/* if (data->builtins_tab)
-		ft_free_tab(data->builtins_tab); */
 	if (data->pipes)
 	{
 		ft_close_pipes(data);
