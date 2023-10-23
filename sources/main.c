@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:16:08 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:37:42 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,11 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 
-// parser quitar las " " ' '
-// parser no debe haber error " | > " o " | < "
 
-// signal
+// signal y $? con status
+
 // Arreglar el ft_split, los espacios
 // cerar los fd cuando hay varios
 // varios heredoc en la misma cmd
-// $? con status
 // exit | ? gerer les leaks
-
 // LEAKS
-
-
-// ec'ho'
