@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/19 14:16:12 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 13:12:19 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -25,7 +24,7 @@ void	ft_init(t_data *data, char **envp)
 		ft_putstr_fd("Invalid tty stdin/stdout\n", 2);
 		exit(0);
 	}
-	ft_set_last_status(0);
+	g_last_status = 0;
 	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	ft_get_env(data, envp);
 	data->path = ft_env_path(data);

@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:16:38 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:58:32 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_update_list_node(t_data *data, int i, char *name, char *var)
 		current = current->next;
 	}
 	if (i == 0)
-		ft_add_env_node(data, name, var);
+		ft_add_env_node(data, name, var, 1);
 	if (i == 1)
 		ft_add_export_node(data, name, var);
 }

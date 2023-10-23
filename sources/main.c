@@ -6,11 +6,13 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:45:45 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:16:08 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_last_status;
 
 int	main(int argc, char **argv, char **envp)
 {

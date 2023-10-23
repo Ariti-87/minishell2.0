@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 12:24:47 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 13:28:10 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <stdbool.h>
 # include <stdarg.h>
 
+extern int	g_last_status;
 
 enum e_type
 {
@@ -129,7 +130,7 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, char *str);
 void			ft_pwd();
-void			ft_echo(t_data *data, char **argv);
+void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
@@ -149,7 +150,7 @@ void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current);
 
 // Environnment
 void			ft_get_env(t_data *data, char **envp);
-void			ft_add_env_node(t_data *data, char *name, char *var);
+void			ft_add_env_node(t_data *data, char *name, char *var, int i);
 void			ft_add_export_node(t_data *data, char *name, char *var);
 void			ft_free_list_env(t_env	*env);
 t_env			*ft_last_env_node(t_env *env);
@@ -171,7 +172,7 @@ char			**ft_env_exec(t_data *data);
 int				ft_cmd_count(t_data *data);
 
 // Status
-void			ft_set_last_status(int status);
+void			ft_set_last_status(t_data *data, int status);
 int				ft_get_last_status(void);
 void			ft_return_status(t_data *data, int status);
 

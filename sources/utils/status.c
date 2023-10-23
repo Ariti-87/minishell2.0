@@ -3,39 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   status.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 10:06:32 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/13 15:53:34 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 13:31:52 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	*ft_last_status(void)
+void	ft_set_last_status(t_data *data, int status)
 {
-	static int	last_s = 0;
-
-	return (&last_s);
-}
-
-int	ft_get_last_status(void)
-{
-	return (*ft_last_status());
-}
-
-void	ft_set_last_status(int status)
-{
-	*ft_last_status() = status;
-}
-
-void	ft_return_status(t_data *data, int status)
-{
-	if (data->cmds_nb > 1)
-	{
-		ft_close_and_free(data);
-		exit(status);
-	}
-	else
-		ft_set_last_status(status);
+	g_last_status = status;
+	free(data->env->var);
+	data->env->var = ft_itoa(g_last_status);
 }
