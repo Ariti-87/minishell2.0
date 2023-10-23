@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/20 17:55:46 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 12:51:40 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current);
 
 // Environnment
 void			ft_get_env(t_data *data, char **envp);
-void			ft_add_env_node(t_data *data, char *name, char *var);
+void			ft_add_env_node(t_data *data, char *name, char *var, int i);
 void			ft_add_export_node(t_data *data, char *name, char *var);
 void			ft_free_list_env(t_env	*env);
 t_env			*ft_last_env_node(t_env *env);
