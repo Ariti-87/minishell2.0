@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 14:47:41 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:50:54 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int				ft_error_msn_separator(char *str, int err_sep);
 void			ft_free_tab(char **tab);
 void			ft_free_token(t_token **token);
 void			ft_free_list_lexer(t_token **list);
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
+char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 void			ft_free_parsing(t_data *data);
 char			*ft_strstr(char *str, char *to_find);
 int				ft_strcmp(const char *s1, const char *s2);
