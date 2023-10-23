@@ -6,13 +6,13 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 17:05:09 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:22:44 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
+// Quote checker
 int	ft_update_quote(char c, int qoute)
 {
 	if (c == '\'' && qoute == N_QUOTE)
@@ -26,6 +26,7 @@ int	ft_update_quote(char c, int qoute)
 	return (qoute);
 }
 
+// Verify if the '$' is alone
 bool	ft_next_sep(char c)
 {
 	if (c == '$' || c == ' ' || c == '=' || c == '\0')
@@ -34,6 +35,7 @@ bool	ft_next_sep(char c)
 		return (false);
 }
 
+// Check if the '$' is between quotes
 bool	ft_between_quotes(char *str, int i)
 {
 	if (i > 0)
@@ -44,4 +46,21 @@ bool	ft_between_quotes(char *str, int i)
 			return (false);
 	}
 	return (false);
+}
+
+// Get the VAR value
+char	*ft_get_var_value(t_data *data, char *var)
+{
+	t_env	*temp = data->env;
+	int		len = ft_strlen(var);
+
+	if (var[0] == '$')
+		return ("PID");
+	while (temp)
+	{
+		if (ft_strncmp(temp->name, var, len) == 0)
+			return (temp->var);
+		temp = temp->next;
+	}
+	return ("");
 }

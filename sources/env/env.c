@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 18:04:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:52:24 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:48:21 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	ft_add_env_node(t_data *data, char *name, char *var, int i)
 	if (i == 0)
 	{
 		new_node->name = ft_strdup("?");
-		new_node->var = ft_strdup("0");
+		new_node->var = ft_itoa(g_last_status);
 	}
 	else
 	{

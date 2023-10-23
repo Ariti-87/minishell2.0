@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 12:51:40 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:47:41 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 # include <readline/history.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <stdarg.h>
+
+extern int	g_last_status;
 
 enum e_type
 {
@@ -98,9 +101,9 @@ int				ft_error_msn_separator(char *str, int err_sep);
 void			ft_free_tab(char **tab);
 void			ft_free_token(t_token **token);
 void			ft_free_list_lexer(t_token **list);
+char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 void			ft_free_parsing(t_data *data);
 char			*ft_strstr(char *str, char *to_find);
-char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 int				ft_strcmp(const char *s1, const char *s2);
 long int		ft_atol(const char *nptr);
 long long int	ft_atoll(const char *nptr);
@@ -127,7 +130,7 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, char *str);
 void			ft_pwd();
-void			ft_echo(t_data *data, char **argv);
+void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
@@ -169,7 +172,7 @@ char			**ft_env_exec(t_data *data);
 int				ft_cmd_count(t_data *data);
 
 // Status
-void			ft_set_last_status(int status);
+void			ft_set_last_status(t_data *data, int status);
 int				ft_get_last_status(void);
 void			ft_return_status(t_data *data, int status);
 
@@ -188,36 +191,18 @@ void			ft_add_word(t_token **token, char *line, int i, int start);
 // Parser
 int				ft_parser(t_data *data);
 int				ft_parser_error(t_token *token);
+void			ft_clear_quotes(t_data *data);
 
 //	Expansion_var
 void			ft_expansion_var(t_data *data);
 int				ft_update_quote(char c, int qoute);
 bool			ft_next_sep(char c);
 bool			ft_between_quotes(char *str, int i);
+char			*ft_get_var_value(t_data *data, char *var);
 
-
-
-void			ft_clear_quote(t_data *data);
-char			*ft_clear_str(t_data *data, char *str);
-int				ft_quote_inside(char *str);
-char			*ft_remove_quotes(char *str);
-char			*ft_merge_quotes(t_data *data, char **tab);
-int				ft_skip_quotes(char *quote, int *j, char *str);
-char			*ft_add_char(char *str, char c);
-int				ft_rm_quotes(char c, char c2, int i);
-char			**ft_clear_tab(char **tab);
-int				ft_nb_quotes(char *str);
-char			*ft_clear_word(char *str);
-void			ft_add_word_space(char **s, char **final, int i);
-int				ft_strlen_tab(char **tab);
-void			ft_modif_var_env(t_data *data, char **tab);
-char			*ft_var_env(t_data *data, char *str);
 
 
 
 void print_lexer(t_token **list);
-
-
-
 
 #endif

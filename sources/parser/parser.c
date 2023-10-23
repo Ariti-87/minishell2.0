@@ -6,13 +6,14 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/19 18:14:09 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 12:18:44 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_token_join(char const *s1, char const *s2)
+// Create the new str to exchange the WORD line
+static char	*ft_token_join(char *s1, char *s2)
 {
 	char	*str;
 	size_t	i;
@@ -35,23 +36,33 @@ static char	*ft_token_join(char const *s1, char const *s2)
 	while (s2[j])
 		str[i++] = s2[j++];
 	str[i] = '\0';
-	free((void *)s1);
 	return (str);
 }
 
-static void	ft_del_list(t_token *current)
+// Merge the list if style = WORD in the first WORD found and deleting
+// the other second one
+static void	ft_join_del_token(t_token *current, t_token *start)
 {
-	current->prev->next = current->next;
-	if (current->next)
+	char	*joined;
+
+	joined = ft_token_join(start->str, current->str);
+	free(current->str);
+	free(start->str);
+	start->str = joined;
+	if (current->next == NULL)
+		current->prev->next = NULL;
+	else
+		current->prev->next = current->next;
+	if (current->next != NULL)
 		current->next->prev = current->prev;
 	free(current);
 }
-
+// Verify the quotes, and putting all the WORD together
 static void	ft_word_join(t_token *token)
 {
+	t_token *aux;
 	t_token	*current;
 	t_token	*start;
-	t_token *aux;
 	int		status;
 
 	status = false;
@@ -66,8 +77,7 @@ static void	ft_word_join(t_token *token)
 		else if (current->type == WORD && status == true)
 		{
 			aux = current->prev;
-			start->str = ft_token_join(start->str, current->str);
-			ft_del_list(current);
+			ft_join_del_token(current, start);
 			current = aux;
 		}
 		else if (current->type == PIPE)
@@ -76,14 +86,13 @@ static void	ft_word_join(t_token *token)
 	}
 }
 
-
+// Check parser error, then merge all the WORD, change $VAR and remove the quotes
 int	ft_parser(t_data *data)
 {
 	if (ft_parser_error(data->token) != 0)
 		return (2);
 	ft_word_join(data->token);
 	ft_expansion_var(data);
-
-	// ft_clear_quotes(*token);
+	ft_clear_quotes(data);
 	return (0);
 }

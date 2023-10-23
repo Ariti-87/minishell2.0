@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
+#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/20 13:17:42 by arincon          ###   ########.fr        #
+#    Updated: 2023/10/23 12:17:43 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,15 +26,15 @@ INCS		:=	include					\
 
 #SOURCES______________________________________________________________
 
-SRC_DIR		:= src
+SRC_DIR		:= sources
 SRCS		:=	main.c							\
-				builtins/builtins_cd.c			\
-				builtins/builtins_echo.c		\
-				builtins/builtins_env.c			\
-				builtins/builtins_exit.c		\
-				builtins/builtins_export.c		\
-				builtins/builtins_pwd.c			\
-				builtins/builtins_unset.c		\
+				builtins/cd.c			\
+				builtins/echo.c		\
+				builtins/env.c			\
+				builtins/exit.c		\
+				builtins/export.c		\
+				builtins/pwd.c			\
+				builtins/unset.c		\
 				builtins/builtins.c				\
 				env/env_exec.c					\
 				env/env_utils.c					\
@@ -46,12 +46,10 @@ SRCS		:=	main.c							\
 				execute/pipex_utils.c			\
 				execute/here_doc.c				\
 				execute/link.c					\
-				parser/expansion_utils.c		\
-				parser/expansion_var.c			\
+				lexer/expansion_utils.c			\
+				lexer/expansion_var.c			\
 				parser/parser_error.c			\
 				parser/parser_quote.c			\
-				parser/parser_var.c				\
-				parser/parser_var_utils.c		\
 				parser/parser.c					\
 				lexer/lexer.c					\
 				lexer/lexer_utils.c				\

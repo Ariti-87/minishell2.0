@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_export.c                                  :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:51:53 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 14:48:27 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	ft_update_list_node(t_data *data, int i, char *name, char *var)
 		current = current->next;
 	}
 	if (i == 0)
-		ft_add_env_node(data, name, var, 1);
+		ft_add_env_node(data, name, var);
 	if (i == 1)
 		ft_add_export_node(data, name, var);
 }

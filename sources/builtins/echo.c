@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_echo.c                                    :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/18 14:52:11 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 13:27:43 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,11 @@ int	ft_echo_option(char *str)
 	return (0);
 }
 
-void	ft_echo(t_data *data, char **argv)
+void	ft_echo(char **argv)
 {
 	int	i;
 	int option;
 
-	if (argv[1] && !ft_strncmp("$?", argv[1], 2))
-	{
-		printf("%d\n", ft_get_last_status());
-		return ;
-	}
 	i = 1;
 	if (!argv[1])
 	{
@@ -55,5 +50,4 @@ void	ft_echo(t_data *data, char **argv)
 	}
 	if (!option)
 		printf("\n");
-	ft_return_status(data, EXIT_SUCCESS);
 }
