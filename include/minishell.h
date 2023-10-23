@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 13:28:10 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:41:35 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ int				ft_error_msn_separator(char *str, int err_sep);
 void			ft_free_tab(char **tab);
 void			ft_free_token(t_token **token);
 void			ft_free_list_lexer(t_token **list);
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
+char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 void			ft_free_parsing(t_data *data);
 char			*ft_strstr(char *str, char *to_find);
 int				ft_strcmp(const char *s1, const char *s2);
@@ -130,12 +130,12 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, char *str);
 void			ft_pwd();
-void			ft_echo(char **argv);
+void			ft_echo(t_data *data, char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
 int				ft_above_lli(char *str, int sign);
-void			ft_env(t_env *env, char **argv);
+void			ft_env(t_data *data, t_env *env, char **argv);
 int				ft_check_arg_env(char *str, int export);
 void			ft_unset(t_env **env, t_env **export, char **argv);
 void			ft_export(t_data *data, char **argv);
@@ -172,9 +172,7 @@ char			**ft_env_exec(t_data *data);
 int				ft_cmd_count(t_data *data);
 
 // Status
-void			ft_set_last_status(t_data *data, int status);
-int				ft_get_last_status(void);
-void			ft_return_status(t_data *data, int status);
+int				ft_set_last_status(t_data *data, int status);
 
 // Signal
 void			signal_handler(int signal);
@@ -190,7 +188,7 @@ void			ft_add_word(t_token **token, char *line, int i, int start);
 
 // Parser
 int				ft_parser(t_data *data);
-int				ft_parser_error(t_token *token);
+bool			ft_parser_error(t_token *token);
 void			ft_clear_quotes(t_data *data);
 
 //	Expansion_var

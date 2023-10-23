@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 13:33:25 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:24:05 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,8 @@ void	ft_execute_minishell(t_data *data, char *line)
 	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
-		return (ft_set_last_status(data, 2));
+		return ;
 	}
-	// print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link_cmd(data);
 	ft_heredoc_path(data);
@@ -91,7 +90,8 @@ void	ft_execute(t_data *data)
 			pid_insert = ft_fork(data, i);
 			data->pid[i] = pid_insert;
 		}
+		ft_waitpid(data);
 	}
-	ft_waitpid(data);
 	ft_free_unlink_cmds(data);
+	// ft_set_last_status(data, 0);
 }

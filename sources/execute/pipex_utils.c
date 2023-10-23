@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 18:12:18 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:53:08 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,20 +85,30 @@ void	ft_close_and_free(t_data *data)
 		ft_free_list_env(data->env);
 	if (data->export)
 		ft_free_list_env(data->export);
-	if (data->cmds)
-		ft_free_unlink_cmds(data);
 	if (data->token)
 		ft_free_list_lexer(&data->token);
+	if (data->cmds)
+		ft_free_unlink_cmds(data);
 }
 
 // Waits for child processes to finish.
 void	ft_waitpid(t_data *data)
 {
 	int	i;
+	int	status;
+	int	save_status;
 
-	i = -1;
-	while (++i < data->cmds_nb && data->pid[i])
-		waitpid(data->pid[i], NULL, 0);
+	save_status = 0;
+	i = 0;
+	while (i < data->cmds_nb && data->pid[i])
+	{
+		waitpid(data->pid[i], &status, 0);
+		i++;
+	}
+	save_status = status;
+	if (WIFEXITED(save_status))
+		status = WEXITSTATUS(save_status);
+	ft_set_last_status(data, status);
 }
 /* // Extracts the PATH variable from the environment.
 // Copy PATH string without "PATH="

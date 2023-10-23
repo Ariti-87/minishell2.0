@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:51:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:32:32 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 17:38:09 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_cd(t_data *data, char **argv)
 	else
 	{
 		ft_putstr_fd("Error: cd: \n", 2);
-		// ft_set_last_status(data, 2);
+		ft_set_last_status(data, 1);
 	}
 }
 void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
@@ -49,13 +49,16 @@ void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
 	if ((!chdir(str)) == 0)
 	{
 		ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
-		// ft_return_status(data, 1);
+		ft_set_last_status(data, 1);
+		return ;
 	}
 	else
 	{
 		ft_update_pwd(&data->env, pwd, oldpwd, current);
 		ft_update_pwd(&data->export, pwd, oldpwd, current);
 	}
+	ft_set_last_status(data, 0);
+
 }
 void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 {
@@ -69,10 +72,12 @@ void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 			if ((!chdir(tmp->var)) == 0)
 			{
 				ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
-				// ft_return_status(data, 1);
+				ft_set_last_status(data, 1);
+				return ;
 			}
 			ft_update_pwd(&data->env, pwd, oldpwd, current);
 			ft_update_pwd(&data->export, pwd, oldpwd, current);
+			ft_set_last_status(data, 0);
 			break ;
 		}
 		tmp = tmp->next;
@@ -80,7 +85,7 @@ void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 	if (!tmp)
 	{
 		ft_putstr_fd("Minishell: cd: HOME not set\n", 2);
-		// ft_return_status(data, 1);
+		ft_set_last_status(data, 1);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/23 12:18:44 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 15:20:31 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static char	*ft_token_join(char *s1, char *s2)
 		return (NULL);
 	str = malloc(sizeof(*str) * (ft_strlen(s1) + ft_strlen(s2) + 2));
 	if (!str)
+	{
+		ft_putstr_fd("error: malloc\n", 2);
 		return (NULL);
+	}
 	i = 0;
 	while (s1[i])
 	{
@@ -89,8 +92,8 @@ static void	ft_word_join(t_token *token)
 // Check parser error, then merge all the WORD, change $VAR and remove the quotes
 int	ft_parser(t_data *data)
 {
-	if (ft_parser_error(data->token) != 0)
-		return (2);
+	if (ft_parser_error(data->token) == true)
+		return (ft_set_last_status(data, 2));
 	ft_word_join(data->token);
 	ft_expansion_var(data);
 	ft_clear_quotes(data);

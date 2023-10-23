@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:27:43 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/23 16:25:15 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	ft_echo_option(char *str)
 	return (0);
 }
 
-void	ft_echo(char **argv)
+void	ft_echo(t_data *data, char **argv)
 {
 	int	i;
 	int option;
@@ -37,6 +37,7 @@ void	ft_echo(char **argv)
 	if (!argv[1])
 	{
 		printf("\n");
+		ft_set_last_status(data, 0);
 		return ;
 	}
 	option = ft_echo_option(argv[i]);
@@ -50,4 +51,5 @@ void	ft_echo(char **argv)
 	}
 	if (!option)
 		printf("\n");
+	ft_set_last_status(data, 0);
 }

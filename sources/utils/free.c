@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:30:29 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 17:03:07 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 17:52:47 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,6 @@ void	ft_free_tab(char **tab)
 	tab = NULL;
 }
 
-void	ft_free_token(t_token **token)
-{
-	if (!*token)
-		return ;
-	if (*token && (*token)->str)
-		free((*token)->str);
-	if (*token)
-		free(*token);
-}
 
 void	ft_free_list_lexer(t_token **list)
 {
