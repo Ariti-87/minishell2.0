@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/23 12:22:44 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:30:51 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,18 @@ bool	ft_between_quotes(char *str, int i)
 	return (false);
 }
 
-// Get the VAR value
+/* Get the VAR value
+*/
 char	*ft_get_var_value(t_data *data, char *var)
 {
 	t_env	*temp = data->env;
-	int		len = ft_strlen(var);
+	// int		len = ft_strlen(var);
 
 	if (var[0] == '$')
-		return ("PID");
+		return (ft_itoa(getpid()));
 	while (temp)
 	{
-		if (ft_strncmp(temp->name, var, len) == 0)
+		if (ft_strcmp(temp->name, var) == 0)
 			return (temp->var);
 		temp = temp->next;
 	}

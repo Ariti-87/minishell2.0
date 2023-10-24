@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:25:35 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:22:11 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 11:28:29 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,4 @@ void	ft_add_word(t_token **token, char *line, int i, int start)
 	}
 	str[index] = '\0';
 	ft_lstadd_back_token(token, ft_new_token(str, WORD));
-	// free(str);
 }

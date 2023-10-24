@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/23 12:22:35 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:34:35 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,22 +77,18 @@ static void	ft_remplace_var(t_token **token, int i, t_data *data)
 	char	*new_str;
 
 	var = ft_identify_var((*token)->str, i);
-	// printf("VAR = %s;", var); // BORRAR
-	// printf(" LEN = %ld;", ft_strlen(var)); // BORRAR
 	value = ft_get_var_value(data, var);
-	// printf("VALUE = %s;\n", value); // BORRAR
 	if (value != NULL)
 	{
-		// printf("NS = %s;\n", (*token)->str); // BORRAR
 		new_str = ft_exchange_var((*token)->str, i, value, var);
+		if (var [0] == '$')
+			free(value);
 		free((*token)->str);
 		(*token)->str = new_str;
-		// printf("NS = %s;\n", (*token)->str); // BORRAR
 	}
 	else
 		value = NULL;
-	if (var[0] != '$')
-		free(var);
+	ft_free_ptr(var);
 }
 
 // Check if there is '$VAR'

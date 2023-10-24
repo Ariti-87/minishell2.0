@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/10 17:14:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/10 17:14:34 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:34:52 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2)
 	if (free_s2 && s2)
 		free(s2);
 	return (new);
+}
+
+void	ft_free_ptr(void *ptr)
+{
+	if (ptr != NULL)
+	{
+		free(ptr);
+		ptr = NULL;
+	}
 }
