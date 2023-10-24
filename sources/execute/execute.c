@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 13:33:25 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 16:39:39 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -44,9 +43,9 @@ void	ft_execute_minishell(t_data *data, char *line)
 		ft_free_parsing(data);
 		return (ft_set_last_status(data, 2));
 	}
-	// print_lexer(&data->token);
+	print_lexer(&data->token);
 	ft_execute_init(data);
-	ft_link_cmd(data);
+	ft_link_cmds(data);
 	ft_heredoc_path(data);
 	ft_free_parsing(data);
 	ft_execute(data);
@@ -69,7 +68,7 @@ void	ft_execute_init(t_data *data)
 	}
 	i = -1;
 	while (++i < data->cmds_nb)
-		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
+		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 void	ft_execute(t_data *data)
@@ -81,7 +80,7 @@ void	ft_execute(t_data *data)
 	i = -1;
 	if (data->cmds_nb == 1 && data->cmds[0]->builtins && !data->cmds[0]->input_redirec
 			&& !data->cmds[0]->output_redirec && !data->cmds[0]->eof)
-		ft_builtins(data, data->cmds[0]->builtins);
+		ft_builtins(data, 0);
 	else
 	{
 		while (++i < data->cmds_nb)

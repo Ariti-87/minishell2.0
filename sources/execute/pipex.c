@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:41:26 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:00:20 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,7 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 		ft_dup2(data, cmd_index);
 		if (data->cmds[cmd_index]->builtins)
 		{
-			ft_builtins(data, data->cmds[cmd_index]->builtins);
-			ft_free_tab(data->builtins_tab);
+			ft_builtins(data, cmd_index);
 			ft_close_and_free(data);
 			exit(67);
 		}
@@ -48,7 +47,7 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 }
 
 
-static void	ft_execve_no_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
+static void	ft_execve_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
 {
 	char	*cmd_final;
 
@@ -56,10 +55,9 @@ static void	ft_execve_no_cmd(t_data *data, char **cmds, char **envp, int cmd_ind
 	if (cmd_final == NULL)
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(data->cmds[cmd_index]->cmd, 2);
+		ft_putstr_fd(data->cmds[cmd_index]->cmd[0], 2);
 		ft_putstr_fd(": command not found\n", 2);
 		ft_close_and_free(data);
-		ft_free_tab(cmds);
 		ft_free_tab(envp);
 		exit(1);
 	}
@@ -72,10 +70,9 @@ static void	ft_execve_no_path(t_data *data, char **cmds, char **envp, int cmd_in
 	if (access(cmds[0], F_OK | X_OK | R_OK))
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(data->cmds[cmd_index]->cmd, 2);
+		ft_putstr_fd(data->cmds[cmd_index]->cmd[0], 2);
 		ft_putstr_fd(": Invalid access\n", 2);
 		ft_close_and_free(data);
-		ft_free_tab(cmds);
 		ft_free_tab(envp);
 		exit(1);
 	}
@@ -85,26 +82,13 @@ static void	ft_execve_no_path(t_data *data, char **cmds, char **envp, int cmd_in
 
 void	ft_execve(t_data *data, int cmd_index)
 {
-	char	**cmds;
 	char	**envp;
 
-	if (data->cmds[cmd_index]->cmd[0] == ' '
-		|| data->cmds[cmd_index]->cmd[0] == '\0')
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(data->cmds[cmd_index]->cmd, 2);
-		ft_putstr_fd(": command not found\n", 2);
-		exit(1);
-	}
 	envp = ft_env_exec(data);
-	cmds = ft_split(data->cmds[cmd_index]->cmd, ' ');
-	if (!cmds)
-		ft_error_msn("problem with split in ft_exec\n", data);
-	if (data->path && !ft_strchr(cmds[0], '/'))
-		ft_execve_no_cmd(data, cmds, envp, cmd_index);
+	if (data->path && !ft_strchr(data->cmds[cmd_index]->cmd[0], '/'))
+		ft_execve_cmd(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
 	else
-		ft_execve_no_path(data, cmds, envp, cmd_index);
-	ft_free_tab(cmds);
+		ft_execve_no_path(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
 	ft_free_tab(envp);
 	ft_error_msn("Error : execve\n", data);
 }

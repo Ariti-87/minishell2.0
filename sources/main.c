@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:38:27 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:02:27 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,7 @@ int	main(int argc, char **argv, char **envp)
 
 
 // signal y $? con status
-// Arreglar el ft_split, los espacios
 
-// cerar los fd cuando hay varios
 // varios heredoc en la misma cmd
 // exit | ? gerer les leaks
-// LEAKS
+

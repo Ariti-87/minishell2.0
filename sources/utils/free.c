@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:30:29 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 17:03:07 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 15:32:24 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab && tab[i])
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:27:43 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 14:35:28 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,10 @@ void	ft_echo(char **argv)
 	option = ft_echo_option(argv[i]);
 	while (argv[i] && ft_echo_option(argv[i]))
 		i++;
-	while (argv[i])
+	while (argv[i] && argv)
 	{
-		printf("%s", argv[i++]);
+		printf("%s", argv[i]);
+		i++;
 		if (argv[i])
 			printf(" ");
 	}

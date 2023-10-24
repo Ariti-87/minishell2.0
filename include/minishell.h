@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 14:50:54 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 14:59:31 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,13 @@ typedef struct s_cmd
 {
 	int			index;
 	int			append;
-	char		*builtins;
-	char		*cmd;
+	char		**builtins;
+	char		**cmd;
 	char		*eof;
 	char		*heredoc_path;
 	char		*input_redirec;
 	char		*output_redirec;
+	int			fd_out;
 }	t_cmd;
 
 typedef struct s_data
@@ -128,7 +129,7 @@ char			*ft_env_path(t_data *data);
 char			*ft_find_cmd(t_data *data, char *cmd);
 
 // Builtins
-void			ft_builtins(t_data *data, char *str);
+void			ft_builtins(t_data *data, int cmd_index);
 void			ft_pwd();
 void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
@@ -180,7 +181,7 @@ void			ft_return_status(t_data *data, int status);
 void			signal_handler(int signal);
 
 // Link
-void			ft_link_cmd(t_data *data);
+void			ft_link_cmds(t_data *data);
 
 //	Lexer
 int				ft_lexer(t_data *data, char *line);
