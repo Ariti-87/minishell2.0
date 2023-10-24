@@ -6,17 +6,17 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:03 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 17:43:37 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:52:09 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_env(t_data *data, t_env *env, char **argv)
+void	ft_env(t_data *data, char **argv)
 {
 	t_env	*tmp;
 
-	tmp = env;
+	tmp = data->env;
 	while (tmp && !argv[1])
 	{
 		if (tmp->name && tmp->var)

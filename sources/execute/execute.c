@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:16:00 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:46:08 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:57:24 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_execute_minishell(t_data *data, char *line)
 		ft_free_parsing(data);
 		return ;
 	}
+	print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link_cmds(data);
 	ft_heredoc_path(data);

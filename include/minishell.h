@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/24 17:43:19 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:53:22 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,12 +130,12 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, int cmd_index);
 void			ft_pwd(void);
-void			ft_echo(char **argv);
+void			ft_echo(t_data *data, char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
 int				ft_above_lli(char *str, int sign);
-void			ft_env(t_data *data, t_env *env, char **argv);
+void			ft_env(t_data *data, char **argv);
 int				ft_check_arg_env(char *str, int export);
 void			ft_unset(t_env **env, t_env **export, char **argv);
 void			ft_export(t_data *data, char **argv);
