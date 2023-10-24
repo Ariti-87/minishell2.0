@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:30:29 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 17:52:47 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:48:51 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_free_tab(char **tab)
 	int	i;
 
 	i = 0;
-	while (tab && tab[i])
+	while (tab[i])
 	{
 		free(tab[i]);
 		i++;

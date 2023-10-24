@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 11:25:05 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 17:09:58 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/23 15:50:40 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	ft_open_stdout(t_data *data, int cmd_index)
 		if (data->cmds[cmd_index]->append == 1)
 		{
 			fd_stdout = open(data->cmds[cmd_index]->output_redirec,
-					O_RDWR | O_APPEND | O_CREAT, 00777);
+					O_RDWR | O_APPEND | O_CREAT, 0644);
 			if (fd_stdout < 0)
 				ft_error_msn("File descriptor error, stdout\n", data);
 		}
 		else
 		{
 			fd_stdout = open(data->cmds[cmd_index]->output_redirec,
-					O_RDWR | O_TRUNC | O_CREAT, 00777);
+					O_RDWR | O_TRUNC | O_CREAT, 0644);
 			if (fd_stdout < 0)
 				ft_error_msn("File descriptor error, stdout\n", data);
 		}

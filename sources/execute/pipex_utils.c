@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 17:53:08 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:46:14 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_find_cmd(t_data *data, char *cmd)
 	char	*find_cmd;
 	char	*v_cmd;
 
+	if (cmd[0] == '\0')
+		return (NULL);
 	i = 0;
 	v_cmd = ft_strjoin_gnl("/", cmd);
 	if (!v_cmd)
@@ -70,8 +72,6 @@ void	ft_close_pipes(t_data *data)
 // Closes pipes, frees allocated memory
 void	ft_close_and_free(t_data *data)
 {
-	// if (data->builtins_tab)
-	// 	ft_free_tab(data->builtins_tab);
 	if (data->paths)
 		ft_free_tab(data->paths);
 	if (data->pipes)

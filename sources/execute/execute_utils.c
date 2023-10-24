@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:38:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 17:16:05 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 15:17:55 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	ft_free_cmds(t_data *data)
 			data->cmds[i]->heredoc_path = NULL;
 		}
 		if (data->cmds[i]->cmd)
-			free(data->cmds[i]->cmd);
+			ft_free_tab(data->cmds[i]->cmd);
 		if (data->cmds[i]->builtins)
-			free(data->cmds[i]->builtins);
+			ft_free_tab(data->cmds[i]->builtins);
 		if (data->cmds[i]->input_redirec)
 			free(data->cmds[i]->input_redirec);
 		if (data->cmds[i]->output_redirec)

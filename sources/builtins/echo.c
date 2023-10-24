@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 16:25:15 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 17:45:31 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_echo_option(char *str)
 void	ft_echo(t_data *data, char **argv)
 {
 	int	i;
-	int option;
+	int	option;
 
 	i = 1;
 	if (!argv[1])
@@ -43,7 +43,7 @@ void	ft_echo(t_data *data, char **argv)
 	option = ft_echo_option(argv[i]);
 	while (argv[i] && ft_echo_option(argv[i]))
 		i++;
-	while (argv[i])
+	while (argv[i] && argv)
 	{
 		printf("%s", argv[i++]);
 		if (argv[i])
