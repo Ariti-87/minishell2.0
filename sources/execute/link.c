@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:14:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 15:35:59 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:19:18 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ static void	ft_link_sep(t_data *data, t_token *current, int cmd_index)
 	}
 }
 
-
-
 static void	ft_link(t_data *data, t_token *head, int cmd_index, int word_count)
 {
 	int		tab_index;
@@ -112,7 +110,6 @@ static void	ft_link(t_data *data, t_token *head, int cmd_index, int word_count)
 		data->cmds[cmd_index]->cmd[tab_index] = 0;
 	}
 }
-
 
 void	ft_link_cmds(t_data *data)
 {

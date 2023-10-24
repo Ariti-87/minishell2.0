@@ -6,22 +6,20 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/02 14:53:42 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 17:07:36 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:10:54 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**ft_env_exec(t_data *data)
+char	**ft_env_exec(t_data *data, int i)
 {
 	char	**envp;
 	t_env	*current;
 	int		env_size;
-	int		i;
 
 	current = data->env;
 	env_size = 0;
-	i = 0;
 	while (current)
 	{
 		env_size++;

@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:21:17 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 14:35:28 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:14:14 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	ft_echo_option(char *str)
 void	ft_echo(char **argv)
 {
 	int	i;
-	int option;
+	int	option;
 
 	i = 1;
 	if (!argv[1])
@@ -44,8 +44,7 @@ void	ft_echo(char **argv)
 		i++;
 	while (argv[i] && argv)
 	{
-		printf("%s", argv[i]);
-		i++;
+		printf("%s", argv[i++]);
 		if (argv[i])
 			printf(" ");
 	}

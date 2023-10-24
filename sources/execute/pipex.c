@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:00:20 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:20:22 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 	return (pid);
 }
 
-
 static void	ft_execve_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
 {
 	char	*cmd_final;
@@ -64,13 +63,12 @@ static void	ft_execve_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
 	execve(cmd_final, cmds, envp);
 }
 
-
-static void	ft_execve_no_path(t_data *data, char **cmds, char **envp, int cmd_index)
+static void	ft_execve_nopath(t_data *data, char **cmds, char **envp, int index)
 {
 	if (access(cmds[0], F_OK | X_OK | R_OK))
 	{
 		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(data->cmds[cmd_index]->cmd[0], 2);
+		ft_putstr_fd(data->cmds[index]->cmd[0], 2);
 		ft_putstr_fd(": Invalid access\n", 2);
 		ft_close_and_free(data);
 		ft_free_tab(envp);
@@ -79,58 +77,17 @@ static void	ft_execve_no_path(t_data *data, char **cmds, char **envp, int cmd_in
 	execve(cmds[0], cmds, 0);
 }
 
-
 void	ft_execve(t_data *data, int cmd_index)
 {
 	char	**envp;
+	int		i;
 
-	envp = ft_env_exec(data);
+	i = 0;
+	envp = ft_env_exec(data, i);
 	if (data->path && !ft_strchr(data->cmds[cmd_index]->cmd[0], '/'))
 		ft_execve_cmd(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
 	else
-		ft_execve_no_path(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
+		ft_execve_nopath(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
 	ft_free_tab(envp);
 	ft_error_msn("Error : execve\n", data);
 }
-
-// void	ft_execve(t_data *data, int cmd_index)
-// {
-// 	char	**cmds;
-// 	char	*cmd_final;
-// 	char	**envp;
-
-// 	if (data->cmds[cmd_index]->cmd[0] == ' '
-// 		|| data->cmds[cmd_index]->cmd[0] == '\0')
-// 	{
-// 		ft_putstr_fd("minishell: ", 2);
-// 		ft_putstr_fd(data->cmds[cmd_index]->cmd, 2);
-// 		ft_putstr_fd(": command not found\n", 2);
-// 		exit(1);
-// 	}
-// 	envp = ft_env_exec(data);
-// 	cmds = ft_split(data->cmds[cmd_index]->cmd, ' ');
-// 	if (!cmds)
-// 		ft_error_msn("problem with split in ft_exec\n", data);
-// 	if (data->path && !ft_strchr(cmds[0], '/'))
-// 	{
-// 		cmd_final = ft_find_cmd(data, cmds[0]);
-// 		if (cmd_final == NULL)
-// 		{
-// 			ft_putstr_fd("minishell: ", 2);
-// 			ft_putstr_fd(data->cmds[cmd_index]->cmd, 2);
-// 			ft_putstr_fd(": command not found\n", 2);
-// 			ft_close_and_free(data);
-// 			ft_free_tab(cmds);
-// 			ft_free_tab(envp);
-// 			exit(1);
-// 		}
-// 		execve(cmd_final, cmds, envp);
-// 	}
-// 	else
-// 	{
-// 		if (access(cmds[0], F_OK | X_OK | R_OK))
-// 			ft_error_msn("Invalid access without PATH\n", data);
-// 		execve(cmds[0], cmds, 0);
-// 	}
-// 	ft_error_msn("Error : execve\n", data);
-// }
