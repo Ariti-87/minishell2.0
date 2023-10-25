@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:03:34 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 15:36:39 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:12:29 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,7 @@ void	ft_clear_quotes(t_data *data)
 	char	*new_str;
 
 	current = data->token;
-	while (current && current->type != END/* ************************************************************************** */
-)
+	while (current && current->type != END)
 	{
 		quote = N_QUOTE;
 		quote_count = 0;

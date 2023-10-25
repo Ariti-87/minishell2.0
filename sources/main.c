@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:43:50 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:20:00 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,4 @@ int	main(int argc, char **argv, char **envp)
 	return (0);
 }
 // signal y $? con status
-// varios heredoc en la misma cmd
 // exit | ? gerer les leaks

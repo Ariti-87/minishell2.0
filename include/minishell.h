@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:26:03 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 15:26:20 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:16:39 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,6 @@ int				ft_set_sep_type(char *line, int i);
 
 // Parser
 int				ft_parser(t_data *data);
-bool			ft_parser_error(t_token *token);
 void			ft_clear_quotes(t_data *data);
 
 //	Expansion_var
