@@ -6,28 +6,26 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:25 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 13:27:55 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 18:06:36 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_builtins(t_data *data, char *str)
+void	ft_builtins(t_data *data, int cmd_index)
 {
-	data->builtins_tab = ft_split(str, ' ');
-	if (!ft_strcmp(data->builtins_tab[0], "echo"))
-		ft_echo(data->builtins_tab);
-	else if (!ft_strcmp(data->builtins_tab[0], "pwd"))
+	if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "echo", 5))
+		ft_echo(data, data->cmds[cmd_index]->builtins);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "pwd", 4))
 		ft_pwd();
-	else if (!ft_strcmp(data->builtins_tab[0], "exit"))
-		ft_exit(data, data->builtins_tab);
-	else if (!ft_strcmp(data->builtins_tab[0], "env"))
-		ft_env(data->env, data->builtins_tab);
-	else if (!ft_strcmp(data->builtins_tab[0], "cd"))
-		ft_cd(data, data->builtins_tab);
-	else if (!ft_strcmp(data->builtins_tab[0], "unset"))
-		ft_unset(&data->env, &data->export, data->builtins_tab);
-	else if (!ft_strcmp(data->builtins_tab[0], "export"))
-		ft_export(data, data->builtins_tab);
-	ft_free_tab(data->builtins_tab);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "exit", 5))
+		ft_exit(data, data->cmds[cmd_index]->builtins);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "env", 4))
+		ft_env(data, data->cmds[cmd_index]->builtins);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "cd", 3))
+		ft_cd(data, data->cmds[cmd_index]->builtins);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "unset", 6))
+		ft_unset(&data->env, &data->export, data->cmds[cmd_index]->builtins);
+	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "export", 7))
+		ft_export(data, data->cmds[cmd_index]->builtins);
 }

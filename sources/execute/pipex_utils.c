@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 18:12:18 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/24 17:46:14 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ char	*ft_find_cmd(t_data *data, char *cmd)
 	char	*find_cmd;
 	char	*v_cmd;
 
+	if (cmd[0] == '\0')
+		return (NULL);
 	i = 0;
 	v_cmd = ft_strjoin_gnl("/", cmd);
 	if (!v_cmd)
@@ -70,8 +72,6 @@ void	ft_close_pipes(t_data *data)
 // Closes pipes, frees allocated memory
 void	ft_close_and_free(t_data *data)
 {
-	// if (data->builtins_tab)
-	// 	ft_free_tab(data->builtins_tab);
 	if (data->paths)
 		ft_free_tab(data->paths);
 	if (data->pipes)
@@ -85,20 +85,30 @@ void	ft_close_and_free(t_data *data)
 		ft_free_list_env(data->env);
 	if (data->export)
 		ft_free_list_env(data->export);
-	if (data->cmds)
-		ft_free_unlink_cmds(data);
 	if (data->token)
 		ft_free_list_lexer(&data->token);
+	if (data->cmds)
+		ft_free_unlink_cmds(data);
 }
 
 // Waits for child processes to finish.
 void	ft_waitpid(t_data *data)
 {
 	int	i;
+	int	status;
+	int	save_status;
 
-	i = -1;
-	while (++i < data->cmds_nb && data->pid[i])
-		waitpid(data->pid[i], NULL, 0);
+	save_status = 0;
+	i = 0;
+	while (i < data->cmds_nb && data->pid[i])
+	{
+		waitpid(data->pid[i], &status, 0);
+		i++;
+	}
+	save_status = status;
+	if (WIFEXITED(save_status))
+		status = WEXITSTATUS(save_status);
+	ft_set_last_status(data, status);
 }
 /* // Extracts the PATH variable from the environment.
 // Copy PATH string without "PATH="

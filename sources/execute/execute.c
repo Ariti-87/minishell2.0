@@ -6,10 +6,9 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/24 11:07:27 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:22:43 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -38,15 +37,14 @@ void	ft_minishell(t_data *data)
 void	ft_execute_minishell(t_data *data, char *line)
 {
 	ft_lexer(data, line);
-
 	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
-		return (ft_set_last_status(data, 2));
+		return ;
 	}
 	print_lexer(&data->token);
 	ft_execute_init(data);
-	ft_link_cmd(data);
+	ft_link_cmds(data);
 	ft_heredoc_path(data);
 	ft_free_parsing(data);
 	ft_execute(data);
@@ -63,13 +61,13 @@ void	ft_execute_init(t_data *data)
 		ft_error_msn("Invalid Malloc struct cmds\n", data);
 	while (++i < data->cmds_nb)
 	{
- 		data->cmds[i] = malloc(sizeof(t_cmd));
+		data->cmds[i] = malloc(sizeof(t_cmd));
 		if (!data->cmds[i])
 			ft_error_msn("Invalid Malloc struct cmds\n", data);
 	}
 	i = -1;
 	while (++i < data->cmds_nb)
-		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0};
+		*data->cmds[i] = (t_cmd){i, 0, 0, 0, 0, 0, 0, 0, 0};
 }
 
 void	ft_execute(t_data *data)
@@ -79,9 +77,10 @@ void	ft_execute(t_data *data)
 
 	ft_pid_init(data);
 	i = -1;
-	if (data->cmds_nb == 1 && data->cmds[0]->builtins && !data->cmds[0]->input_redirec
-			&& !data->cmds[0]->output_redirec && !data->cmds[0]->eof)
-		ft_builtins(data, data->cmds[0]->builtins);
+	if (data->cmds_nb == 1 && data->cmds[0]->builtins
+		&& !data->cmds[0]->input_redirec
+		&& !data->cmds[0]->output_redirec && !data->cmds[0]->eof)
+		ft_builtins(data, 0);
 	else
 	{
 		while (++i < data->cmds_nb)
@@ -91,7 +90,8 @@ void	ft_execute(t_data *data)
 			pid_insert = ft_fork(data, i);
 			data->pid[i] = pid_insert;
 		}
+		ft_waitpid(data);
 	}
-	ft_waitpid(data);
 	ft_free_unlink_cmds(data);
+	// ft_set_last_status(data, 0);
 }

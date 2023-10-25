@@ -6,10 +6,9 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/24 17:34:56 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:22:27 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -71,12 +70,13 @@ typedef struct s_cmd
 {
 	int			index;
 	int			append;
-	char		*builtins;
-	char		*cmd;
+	char		**builtins;
+	char		**cmd;
 	char		*eof;
 	char		*heredoc_path;
 	char		*input_redirec;
 	char		*output_redirec;
+	int			fd_out;
 }	t_cmd;
 
 typedef struct s_data
@@ -101,7 +101,7 @@ int				ft_error_msn_separator(char *str, int err_sep);
 void			ft_free_tab(char **tab);
 void			ft_free_token(t_token **token);
 void			ft_free_list_lexer(t_token **list);
-char	*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
+char			*ft_strjoin_free(char *s1, char *s2, int free_s1, int free_s2);
 void			ft_free_parsing(t_data *data);
 char			*ft_strstr(char *str, char *to_find);
 int				ft_strcmp(const char *s1, const char *s2);
@@ -116,10 +116,10 @@ void			ft_pid_init(t_data *data);
 
 // Pipex Fonctions
 pid_t			ft_fork(t_data *data, int cmd_index);
-void 			ft_dup2(t_data *data, int cmd_index);
+void			ft_dup2(t_data *data, int cmd_index);
 void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
 void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
-void 			ft_execve(t_data *data, int cmd_index);
+void			ft_execve(t_data *data, int cmd_index);
 int				ft_open_stdin(t_data *data, int cmd_index);
 int				ft_open_stdout(t_data *data, int cmd_index);
 void			ft_waitpid(t_data *data);
@@ -129,14 +129,14 @@ char			*ft_env_path(t_data *data);
 char			*ft_find_cmd(t_data *data, char *cmd);
 
 // Builtins
-void			ft_builtins(t_data *data, char *str);
-void			ft_pwd();
-void			ft_echo(char **argv);
+void			ft_builtins(t_data *data, int cmd_index);
+void			ft_pwd(void);
+void			ft_echo(t_data *data, char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
 int				ft_above_lli(char *str, int sign);
-void			ft_env(t_env *env, char **argv);
+void			ft_env(t_data *data, char **argv);
 int				ft_check_arg_env(char *str, int export);
 void			ft_unset(t_env **env, t_env **export, char **argv);
 void			ft_export(t_data *data, char **argv);
@@ -169,19 +169,17 @@ void			ft_execute(t_data *data);
 void			ft_execute_init(t_data *data);
 void			ft_free_cmds(t_data *data);
 void			ft_free_unlink_cmds(t_data *data);
-char			**ft_env_exec(t_data *data);
+char			**ft_env_exec(t_data *data, int i);
 int				ft_cmd_count(t_data *data);
 
 // Status
-void			ft_set_last_status(t_data *data, int status);
-int				ft_get_last_status(void);
-void			ft_return_status(t_data *data, int status);
+int				ft_set_last_status(t_data *data, int status);
 
 // Signal
 void			signal_handler(int signal);
 
 // Link
-void			ft_link_cmd(t_data *data);
+void			ft_link_cmds(t_data *data);
 
 //	Lexer
 int				ft_lexer(t_data *data, char *line);
@@ -191,9 +189,8 @@ void			ft_add_word(t_token **token, char *line, int i, int start);
 
 // Parser
 int				ft_parser(t_data *data);
-int				ft_parser_error(t_token *token);
+bool			ft_parser_error(t_token *token);
 void			ft_clear_quotes(t_data *data);
-
 
 //	Expansion_var
 void			ft_expansion_var(t_data *data);
@@ -202,9 +199,7 @@ bool			ft_next_sep(char c);
 bool			ft_between_quotes(char *str, int i);
 char			*ft_get_var_value(t_data *data, char *var);
 
-
-
-
-void print_lexer(t_token **list);
+// Print
+void			print_lexer(t_token **list);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:18 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:16:41 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/24 15:22:43 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	ft_exit(t_data *data, char **argv)
 	i = 1;
 	if (!argv[i])
 	{
-		ft_free_tab(data->builtins_tab);
 		ft_close_and_free(data);
 		exit (0);
 	}
@@ -32,7 +31,6 @@ void	ft_exit(t_data *data, char **argv)
 	if (argv[i])
 	{
 		ft_exit_arg(argv[i]);
-		ft_free_tab(data->builtins_tab);
 		ft_close_and_free(data);
 		exit(ft_atoll(argv[i]));
 	}

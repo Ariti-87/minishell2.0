@@ -6,13 +6,13 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/24 15:52:32 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:25:36 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// // Create the new str to exchange the WORD line
+// Create the new str to exchange the WORD line
 // static char	*ft_token_join(char *s1, char *s2)
 // {
 // 	char	*str;
@@ -39,12 +39,13 @@
 // 	return (str);
 // }
 
-// Merge the list if style = WORD in the first WORD found and deleting
-// the other second one
-// static void	ft_del_token(t_token *current)
+// // Merge the list if style = WORD in the first WORD found and deleting
+// // the other second one
+// static void	ft_join_del_token(t_token *current, t_token *start)
 // {
 // 	char	*joined;
 
+// 	joined = ft_token_join(start->str, current->str);
 // 	free(current->str);
 // 	free(start->str);
 // 	start->str = joined;
