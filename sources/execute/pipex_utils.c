@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:46:14 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:11:40 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void	ft_waitpid(t_data *data)
 	save_status = status;
 	if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
-	ft_set_last_status(data, status);
+	g_last_status = status;
 }
 /* // Extracts the PATH variable from the environment.
 // Copy PATH string without "PATH="

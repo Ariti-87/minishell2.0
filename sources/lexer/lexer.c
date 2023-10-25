@@ -5,11 +5,10 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 11:41:44 by ddania-c         ###   ########.fr       */
+/*   Created: 2023/10/25 15:31:06 by ddania-c          #+#    #+#             */
+/*   Updated: 2023/10/25 15:33:23 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "minishell.h"
 
@@ -45,7 +44,7 @@ int	ft_set_sep_type(char *line, int i)
 		return (END);
 	return (0);
 }
-//
+
 static int	ft_token(int *i, char *line, int start, t_data *data)
 {
 	int	sep_type;

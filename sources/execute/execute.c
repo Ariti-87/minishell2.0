@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 11:57:27 by ddania-c         ###   ########.fr       */
+/*   Created: 2023/10/25 15:31:37 by ddania-c          #+#    #+#             */
+/*   Updated: 2023/10/25 15:31:40 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_execute_minishell(t_data *data, char *line)
 		g_last_status = 2;
 		return ;
 	}
-	print_lexer(&data->token);
+	// print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link_cmds(data);
 	ft_heredoc_path(data);
@@ -94,5 +94,4 @@ void	ft_execute(t_data *data)
 		ft_waitpid(data);
 	}
 	ft_free_unlink_cmds(data);
-	// ft_set_last_status(data, 0);
 }

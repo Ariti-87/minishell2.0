@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 13:01:15 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:33:47 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_get_var_value(t_data *data, char *var)
 	t_env	*temp;
 
 	temp = data->env;
-		while (temp)
+	while (temp)
 	{
 		if (ft_strcmp(temp->name, var) == 0)
 			return (temp->var);

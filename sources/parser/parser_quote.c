@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/11 11:03:34 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:21:29 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:36:39 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	*ft_remove_quotes(char *line, int to_remove, int quote)
 	{
 		quote = ft_update_quote(*line, quote);
 		if ((*line == '\'' && quote == S_QUOTE) || (*line == '\"'
-			&& quote == D_QUOTES) || (*line == '\'' && quote == N_QUOTE)
+				&& quote == D_QUOTES) || (*line == '\'' && quote == N_QUOTE)
 			|| (*line == '\"' && quote == N_QUOTE))
 			line++;
 		else
@@ -76,7 +76,8 @@ void	ft_clear_quotes(t_data *data)
 	char	*new_str;
 
 	current = data->token;
-	while (current && current->type != END )
+	while (current && current->type != END/* ************************************************************************** */
+)
 	{
 		quote = N_QUOTE;
 		quote_count = 0;

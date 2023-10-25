@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 12:23:42 by ddania-c         ###   ########.fr       */
+/*   Created: 2023/10/25 15:26:03 by ddania-c          #+#    #+#             */
+/*   Updated: 2023/10/25 15:26:20 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,10 @@ void			ft_pid_init(t_data *data);
 // Pipex Fonctions
 pid_t			ft_fork(t_data *data, int cmd_index);
 void			ft_dup2(t_data *data, int cmd_index);
-void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
-void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
+void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, \
+				int fd_stdout);
+void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, \
+				int fd_stdout);
 void			ft_execve(t_data *data, int cmd_index);
 int				ft_open_stdin(t_data *data, int cmd_index);
 int				ft_open_stdout(t_data *data, int cmd_index);
@@ -131,7 +133,7 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, int cmd_index);
 void			ft_pwd(void);
-void			ft_echo(t_data *data, char **argv);
+void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
@@ -145,9 +147,12 @@ void			ft_erase_list_node(t_env **env, char **argv);
 void			ft_update_list_node(t_data *data, int i, char *name, char *var);
 void			ft_env_alpha_order(t_env **env);
 void			ft_cd(t_data *data, char **argv);
-void			ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current);
-void			ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str);
-void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current);
+void			ft_cd_home(t_data *data, char *pwd, char *oldpwd, \
+				t_env *current);
+void			ft_cd_directory(t_data *data, char *pwd, char *oldpwd, \
+				char *str);
+void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, \
+				t_env *current);
 
 // Environnment
 void			ft_get_env(t_data *data, char **envp);
@@ -171,9 +176,6 @@ void			ft_free_cmds(t_data *data);
 void			ft_free_unlink_cmds(t_data *data);
 char			**ft_env_exec(t_data *data, int i);
 int				ft_cmd_count(t_data *data);
-
-// Status
-int				ft_set_last_status(t_data *data, int status);
 
 // Signal
 void			signal_handler(int signal);
