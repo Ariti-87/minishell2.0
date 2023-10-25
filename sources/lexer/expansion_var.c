@@ -6,20 +6,11 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 11:01:16 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 13:00:25 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_free_ptr(void *ptr)
-{
-	if (ptr != NULL)
-	{
-		free(ptr);
-		ptr = NULL;
-	}
-}
 
 // Create a str new to exchange the line
 static char	*ft_exchange_var(char *token_str, int i, char *value, char *var)
@@ -86,17 +77,24 @@ static void	ft_remplace_var(t_token **token, int i, t_data *data)
 	char	*new_str;
 
 	var = ft_identify_var((*token)->str, i);
-	value = ft_get_var_value(data, var);
-	if (value != NULL)
-	{
-		new_str = ft_exchange_var((*token)->str, i, value, var);
-		ft_free_ptr((*token)->str);
-		(*token)->str = new_str;
-	}
-	if (var[0] != '$')
-		ft_free_ptr(var);
+	if (var[0] == '?')
+		value = ft_itoa(g_last_status);
+	else if (var[0] == '$')
+		value = ft_itoa(getpid());
 	else
+		value = ft_get_var_value(data, var);
+	new_str = ft_exchange_var((*token)->str, i, value, var);
+	ft_free_ptr((*token)->str);
+	(*token)->str = new_str;
+	if (var[0] == '$')
 		ft_free_ptr(value);
+	else if (var[0] == '?')
+	{
+		ft_free_ptr(value);
+		ft_free_ptr(var);
+	}
+	else
+		ft_free_ptr(var);
 }
 
 // Check if there is '$VAR'

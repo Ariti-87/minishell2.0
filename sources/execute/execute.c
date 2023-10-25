@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 10:22:43 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:57:27 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	ft_execute_minishell(t_data *data, char *line)
 	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
+		g_last_status = 2;
 		return ;
 	}
 	print_lexer(&data->token);

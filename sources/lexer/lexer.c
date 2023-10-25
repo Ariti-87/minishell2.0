@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/23 12:22:21 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:41:44 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	print_lexer(t_token **list)
 	printf("\n");
 }
 
-static int	ft_set_sep_type(char *line, int i)
+int	ft_set_sep_type(char *line, int i)
 {
 	if (((line[i] > 8 && line[i] < 14) || line[i] == 32))
 		return (SPACES);
@@ -57,10 +57,10 @@ static int	ft_token(int *i, char *line, int start, t_data *data)
 			ft_add_word(&data->token, line, (*i), start);
 		if (sep_type == PIPE || sep_type == LESS || sep_type == GREAT
 			|| sep_type == END)
-			ft_add_sep(&data->token, line, (*i), 2,sep_type);
+			ft_add_sep(&data->token, line, (*i), 2);
 		else if (sep_type == LESS_LESS || sep_type == GREAT_GREAT)
 		{
-			ft_add_sep(&data->token, line, (*i), 3,sep_type);
+			ft_add_sep(&data->token, line, (*i), 3);
 			(*i)++;
 		}
 		start = 1 + (*i);

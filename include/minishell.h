@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 10:43:43 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:23:42 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ char			*ft_strstr(char *str, char *to_find);
 int				ft_strcmp(const char *s1, const char *s2);
 long int		ft_atol(const char *nptr);
 long long int	ft_atoll(const char *nptr);
+void			ft_free_ptr(void *ptr);
 
 // Init
 void			ft_init(t_data *data, char **envp);
@@ -183,8 +184,9 @@ void			ft_link_cmds(t_data *data);
 //	Lexer
 int				ft_lexer(t_data *data, char *line);
 int				ft_set_status_quote(int quote, char *line, int i);
-void			ft_add_sep(t_token **token, char *line, int i, int len, int type);
+void			ft_add_sep(t_token **token, char *line, int i, int len);
 void			ft_add_word(t_token **token, char *line, int i, int start);
+int				ft_set_sep_type(char *line, int i);
 
 // Parser
 int				ft_parser(t_data *data);

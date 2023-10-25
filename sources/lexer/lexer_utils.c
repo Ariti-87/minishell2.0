@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 16:25:35 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 10:24:42 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 11:42:44 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,14 @@ static void	ft_lstadd_back_token(t_token **lst, t_token *new)
 	}
 }
 
-void	ft_add_sep(t_token **token, char *line, int i, int len, int type)
+void	ft_add_sep(t_token **token, char *line, int i, int len)
 {
 	int		index;
 	char	*str;
+	int		type;
 
 	index = 0;
+	type = ft_set_sep_type(line, i);
 	str = malloc(sizeof(char) * len);
 	if (!str)
 		return (ft_putstr_fd("error: malloc\n", 2));
