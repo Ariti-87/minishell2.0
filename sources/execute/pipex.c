@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 10:23:23 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:38:10 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,5 +89,9 @@ void	ft_execve(t_data *data, int cmd_index)
 	else
 		ft_execve_nopath(data, data->cmds[cmd_index]->cmd, envp, cmd_index);
 	ft_free_tab(envp);
-	ft_error_msn("Error : execve\n", data);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(data->cmds[cmd_index]->cmd[0], 2);
+	ft_putstr_fd(": Is a directory\n", 2);
+	ft_close_and_free(data);
+	exit(g_last_status = 126);
 }
