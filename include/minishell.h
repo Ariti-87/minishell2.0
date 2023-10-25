@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 15:18:01 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:58:06 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ char			*ft_strstr(char *str, char *to_find);
 int				ft_strcmp(const char *s1, const char *s2);
 long int		ft_atol(const char *nptr);
 long long int	ft_atoll(const char *nptr);
+void			ft_free_ptr(void *ptr);
 
 // Init
 void			ft_init(t_data *data, char **envp);
@@ -116,8 +117,10 @@ void			ft_pid_init(t_data *data);
 // Pipex Fonctions
 pid_t			ft_fork(t_data *data, int cmd_index);
 void			ft_dup2(t_data *data, int cmd_index);
-void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
-void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, int fd_stdout);
+void			ft_dup2_first(t_data *data, int cmd_index, int fd_stdin, \
+				int fd_stdout);
+void			ft_dup2_n(t_data *data, int cmd_index, int fd_stdin, \
+				int fd_stdout);
 void			ft_execve(t_data *data, int cmd_index);
 int				ft_open_stdin(t_data *data, int cmd_index);
 int				ft_open_stdout(t_data *data, int cmd_index);
@@ -130,7 +133,7 @@ char			*ft_find_cmd(t_data *data, char *cmd);
 // Builtins
 void			ft_builtins(t_data *data, int cmd_index);
 void			ft_pwd(void);
-void			ft_echo(t_data *data, char **argv);
+void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
 void			ft_exit_arg(char *str);
@@ -144,9 +147,12 @@ void			ft_erase_list_node(t_env **env, char **argv);
 void			ft_update_list_node(t_data *data, int i, char *name, char *var);
 void			ft_env_alpha_order(t_env **env);
 void			ft_cd(t_data *data, char **argv);
-void			ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current);
-void			ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str);
-void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, t_env *current);
+void			ft_cd_home(t_data *data, char *pwd, char *oldpwd, \
+				t_env *current);
+void			ft_cd_directory(t_data *data, char *pwd, char *oldpwd, \
+				char *str);
+void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, \
+				t_env *current);
 
 // Environnment
 void			ft_get_env(t_data *data, char **envp);
@@ -171,9 +177,6 @@ void			ft_free_unlink_cmds(t_data *data);
 char			**ft_env_exec(t_data *data, int i);
 int				ft_cmd_count(t_data *data);
 
-// Status
-int				ft_set_last_status(t_data *data, int status);
-
 // Signal
 void			signal_handler(int signal);
 
@@ -184,12 +187,12 @@ int				ft_isbuiltins(char *str);
 //	Lexer
 int				ft_lexer(t_data *data, char *line);
 int				ft_set_status_quote(int quote, char *line, int i);
-void			ft_add_sep(t_token **token, char *line, int i, int len, int type);
+void			ft_add_sep(t_token **token, char *line, int i, int len);
 void			ft_add_word(t_token **token, char *line, int i, int start);
+int				ft_set_sep_type(char *line, int i);
 
 // Parser
 int				ft_parser(t_data *data);
-bool			ft_parser_error(t_token *token);
 void			ft_clear_quotes(t_data *data);
 
 //	Expansion_var

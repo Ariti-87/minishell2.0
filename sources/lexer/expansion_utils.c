@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 10:44:15 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:33:47 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,9 @@ bool	ft_between_quotes(char *str, int i)
 */
 char	*ft_get_var_value(t_data *data, char *var)
 {
-	t_env	*temp = data->env;
+	t_env	*temp;
 
-	if (var[0] == '$')
-		return (ft_itoa(getpid()));
+	temp = data->env;
 	while (temp)
 	{
 		if (ft_strcmp(temp->name, var) == 0)

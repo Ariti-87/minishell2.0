@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 12:03:38 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 16:29:22 by arincon          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/10/25 16:56:12 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,10 @@ void	ft_execute_minishell(t_data *data, char *line)
 	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
+		g_last_status = 2;
 		return ;
 	}
+	// print_lexer(&data->token);
 	ft_execute_init(data);
 	ft_link(data);
 	ft_free_parsing(data);

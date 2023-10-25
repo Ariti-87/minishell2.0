@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:20:25 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 18:06:36 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 14:12:56 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_builtins(t_data *data, int cmd_index)
 {
 	if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "echo", 5))
-		ft_echo(data, data->cmds[cmd_index]->builtins);
+		ft_echo(data->cmds[cmd_index]->builtins);
 	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "pwd", 4))
 		ft_pwd();
 	else if (!ft_strncmp(data->cmds[cmd_index]->builtins[0], "exit", 5))

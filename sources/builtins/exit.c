@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:24:18 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 15:22:43 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:25:50 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_exit(t_data *data, char **argv)
 	if (!argv[i])
 	{
 		ft_close_and_free(data);
-		exit (0);
+		exit (g_last_status);
 	}
 	if (argv[i] && argv[i + 1])
 	{
@@ -31,8 +31,9 @@ void	ft_exit(t_data *data, char **argv)
 	if (argv[i])
 	{
 		ft_exit_arg(argv[i]);
+		g_last_status = ft_atoll(argv[i]) % 255;
 		ft_close_and_free(data);
-		exit(ft_atoll(argv[i]));
+		exit(g_last_status);
 	}
 }
 

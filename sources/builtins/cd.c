@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:51:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 12:01:08 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 16:59:31 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_cd(t_data *data, char **argv)
 		else if (argv[2])
 		{
 			ft_putstr_fd("minishell: cd: too many arguments\n", 2);
-			ft_set_last_status(data, 1);
+			g_last_status = 1;
 		}
 		else
 			ft_cd_directory(data, pwd, oldpwd, argv[1]);
@@ -38,6 +38,7 @@ void	ft_cd(t_data *data, char **argv)
 	else
 	{
 		ft_putstr_fd("Error: cd: \n", 2);
+		g_last_status = 1;
 	}
 }
 
@@ -55,7 +56,7 @@ void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
 		ft_update_pwd(&data->env, pwd, oldpwd, current);
 		ft_update_pwd(&data->export, pwd, oldpwd, current);
 	}
-	ft_set_last_status(data, 0);
+	g_last_status = 0;
 }
 
 void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
@@ -73,7 +74,7 @@ void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)
 			}
 			ft_update_pwd(&data->env, pwd, oldpwd, current);
 			ft_update_pwd(&data->export, pwd, oldpwd, current);
-			ft_set_last_status(data, 0);
+			g_last_status = 0;
 			break ;
 		}
 		tmp = tmp->next;

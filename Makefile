@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
+#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/25 12:13:26 by arincon          ###   ########.fr        #
+#    Updated: 2023/10/25 16:57:46 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,50 +16,48 @@ NAME		:= minishell
 #DIRECTORIES_________________________________________________________
 
 LIBS		:=	ft gnl
-LIBS_TARGET	:=							\
-				lib/libft/libft.a		\
+LIBS_TARGET	:=								\
+				lib/libft/libft.a			\
 				lib/libgnl/libgnl.a
 
-INCS		:=	include					\
-				lib/libft/include		\
+INCS		:=	include						\
+				lib/libft/include			\
 				lib/libgnl/include
 
 #SOURCES______________________________________________________________
 
 SRC_DIR		:= sources
-SRCS		:=	main.c							\
-				builtins/cd.c					\
-				builtins/echo.c					\
-				builtins/env.c					\
-				builtins/exit.c					\
-				builtins/export.c				\
-				builtins/pwd.c					\
-				builtins/unset.c				\
-				builtins/builtins.c				\
-				env/env_exec.c					\
-				env/env_utils.c					\
-				env/env.c						\
-				execute/execute_utils.c			\
-				execute/execute.c				\
-				execute/pipex.c					\
-				execute/pipex_open.c			\
-				execute/pipex_utils.c			\
-				execute/here_doc.c				\
-				execute/link.c					\
-				execute/link_utils.c			\
-				lexer/expansion_utils.c			\
-				lexer/expansion_var.c			\
-				parser/parser_error.c			\
-				parser/parser_quote.c			\
-				parser/parser.c					\
-				lexer/lexer.c					\
-				lexer/lexer_utils.c				\
-				utils/free.c					\
-				utils/init.c					\
-				utils/signal.c					\
-				utils/status.c					\
-				utils/utils.c					\
-				utils/utils2.c					\
+SRCS		:=	main.c						\
+				builtins/cd.c				\
+				builtins/echo.c				\
+				builtins/env.c				\
+				builtins/exit.c				\
+				builtins/export.c			\
+				builtins/pwd.c				\
+				builtins/unset.c			\
+				builtins/builtins.c			\
+				env/env_exec.c				\
+				env/env_utils.c				\
+				env/env.c					\
+				execute/execute_utils.c		\
+				execute/execute.c			\
+				execute/pipex.c				\
+				execute/pipex_open.c		\
+				execute/pipex_utils.c		\
+				execute/here_doc.c			\
+				execute/link.c				\
+				execute/link_utils.c		\
+				lexer/expansion_utils.c		\
+				lexer/expansion_var.c		\
+				parser/quote.c				\
+				parser/parser.c				\
+				lexer/lexer.c				\
+				lexer/lexer_utils.c			\
+				utils/free.c				\
+				utils/init.c				\
+				utils/signal.c				\
+				utils/utils.c				\
+				utils/utils2.c				\
 
 SRCS		:= $(SRCS:%=$(SRC_DIR)/%)
 
