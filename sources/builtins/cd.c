@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:51:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:44:08 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 12:01:08 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
 		ft_update_pwd(&data->export, pwd, oldpwd, current);
 	}
 	ft_set_last_status(data, 0);
-
 }
 
 void	ft_cd_home(t_data *data, char *pwd, char *oldpwd, t_env *current)

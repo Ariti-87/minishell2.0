@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 11:14:05 by ddania-c         ###   ########.fr       */
+/*   Created: 2023/10/25 12:03:38 by arincon           #+#    #+#             */
+/*   Updated: 2023/10/25 16:29:22 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ void	ft_execute_minishell(t_data *data, char *line)
 		ft_free_parsing(data);
 		return ;
 	}
-	// print_lexer(&data->token);
 	ft_execute_init(data);
-	ft_link_cmds(data);
-	ft_heredoc_path(data);
+	ft_link(data);
 	ft_free_parsing(data);
 	ft_execute(data);
 }
@@ -85,13 +83,10 @@ void	ft_execute(t_data *data)
 	{
 		while (++i < data->cmds_nb)
 		{
-			if (data->cmds[i]->eof)
-				ft_heredoc_create(data, i, data->cmds[i]->heredoc_path);
 			pid_insert = ft_fork(data, i);
 			data->pid[i] = pid_insert;
 		}
 		ft_waitpid(data);
 	}
 	ft_free_unlink_cmds(data);
-	// ft_set_last_status(data, 0);
 }

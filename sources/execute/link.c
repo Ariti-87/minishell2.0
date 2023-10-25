@@ -6,112 +6,98 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:14:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:19:18 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 15:38:44 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* static void	ft_link_builtins_cmd(t_data *data, t_token *head, int cmd_index)
+static void	ft_link_in_out(t_data *data, t_token *current, int i)
 {
-	data->cmds[cmd_index]->builtins = malloc(sizeof(char *) * (word_count + 1));
+	if (data->cmds[i]->output_redirec)
+		free(data->cmds[i]->output_redirec);
+	data->cmds[i]->output_redirec = ft_strdup(current->next->str);
+	if (current->type == GREAT_GREAT)
+		data->cmds[i]->append = 1;
+	if (current->type == GREAT)
+		data->cmds[i]->append = 0;
+	if (data->cmds[i]->append == 0)
+		data->cmds[i]->fd_out
+			= open(data->cmds[i]->output_redirec,
+				O_RDWR | O_TRUNC | O_CREAT, 0644);
+	else
+		data->cmds[i]->fd_out
+			= open(data->cmds[i]->output_redirec,
+				O_RDWR | O_APPEND | O_CREAT, 0644);
+	close(data->cmds[i]->fd_out);
+}
+
+static void	ft_link_sep(t_data *data, t_token *current, int i)
+{
+	if (current->type == LESS)
+	{
+		if (data->cmds[i]->input_redirec)
+			free(data->cmds[i]->input_redirec);
+		data->cmds[i]->input_redirec = ft_strdup(current->next->str);
+	}
+	else if (current->type == LESS_LESS)
+	{
+		if (data->cmds[i]->eof)
+		{
+			free(data->cmds[i]->eof);
+			free(data->cmds[i]->heredoc_path);
+		}
+		data->cmds[i]->eof = ft_strdup(current->next->str);
+		ft_heredoc_path(data, i);
+		ft_heredoc_create(data, i, data->cmds[i]->heredoc_path);
+	}
+	else
+		ft_link_in_out(data, current, i);
+}
+
+static void	ft_link_built_cmd(t_data *data, t_token *head, int index, int flag)
+{
+	t_token	*current;
+	int		tab_index;
+
+	tab_index = 0;
+	current = head;
 	while (current && (current->type != END && current->type != PIPE))
 	{
 		if (current->type == WORD)
 		{
-			data->cmds[cmd_index]->builtins[tab_index] = ft_strdup(current->str);
+			if (flag == 0)
+				data->cmds[index]->builtins[tab_index]
+					= ft_strdup(current->str);
+			else
+				data->cmds[index]->cmd[tab_index] = ft_strdup(current->str);
 			tab_index++;
 		}
 		current = current->next;
 	}
-	data->cmds[cmd_index]->builtins[tab_index] = 0;
-} */
-static int	ft_isbuiltins(char *str)
-{
-	if (!ft_strncmp(str, "echo", 5))
-		return (1);
-	if (!ft_strncmp(str, "exit", 5))
-		return (1);
-	if (!ft_strncmp(str, "export", 7))
-		return (1);
-	if (!ft_strncmp(str, "env", 4))
-		return (1);
-	if (!ft_strncmp(str, "cd", 3))
-		return (1);
-	if (!ft_strncmp(str, "pwd", 4))
-		return (1);
-	if (!ft_strncmp(str, "unset", 6))
-		return (1);
-	return (0);
-}
-
-static void	ft_link_sep(t_data *data, t_token *current, int cmd_index)
-{
-	if (current->type == LESS)
-	{
-		if (data->cmds[cmd_index]->input_redirec)
-			free(data->cmds[cmd_index]->input_redirec);
-		data->cmds[cmd_index]->input_redirec = ft_strdup(current->next->str);
-	}
-	else if (current->type == LESS_LESS)
-		data->cmds[cmd_index]->eof = ft_strdup(current->next->str);
+	if (flag == 0)
+		data->cmds[index]->builtins[tab_index] = 0;
 	else
-	{
-		if (data->cmds[cmd_index]->output_redirec)
-		{
-			free(data->cmds[cmd_index]->output_redirec);
-		}
-		data->cmds[cmd_index]->output_redirec = ft_strdup(current->next->str);
-		if (data->cmds[cmd_index]->append == 0)
-			data->cmds[cmd_index]->fd_out = open(data->cmds[cmd_index]->output_redirec, O_RDWR | O_TRUNC | O_CREAT, 0644);
-		else
-			data->cmds[cmd_index]->fd_out = open(data->cmds[cmd_index]->output_redirec, O_RDWR | O_APPEND | O_CREAT, 0644);
-		if (current->type == GREAT_GREAT)
-			data->cmds[cmd_index]->append = 1;
-		if (current->type == GREAT)
-			data->cmds[cmd_index]->append = 0;
-		close(data->cmds[cmd_index]->fd_out);
-	}
+		data->cmds[index]->cmd[tab_index] = 0;
 }
 
-static void	ft_link(t_data *data, t_token *head, int cmd_index, int word_count)
+static void	ft_link_cmds(t_data *data, t_token *head, int i, int word_count)
 {
-	int		tab_index;
-	t_token	*current;
-
-	current = head;
-	tab_index = 0;
-	if (ft_isbuiltins(current->str))
+	if (ft_isbuiltins(head->str))
 	{
-		data->cmds[cmd_index]->builtins = malloc(sizeof(char *) * (word_count + 1));
-		while (current && (current->type != END && current->type != PIPE))
-		{
-			if (current->type == WORD)
-			{
-				data->cmds[cmd_index]->builtins[tab_index] = ft_strdup(current->str);
-				tab_index++;
-			}
-			current = current->next;
-		}
-		data->cmds[cmd_index]->builtins[tab_index] = 0;
+		data->cmds[i]->builtins
+			= malloc(sizeof(char *) * (word_count + 1));
+		ft_link_built_cmd(data, head, i, 0);
 	}
 	else
 	{
-		data->cmds[cmd_index]->cmd = malloc(sizeof(char *) * (word_count + 1));
-		while (current && (current->type != END && current->type != PIPE))
-		{
-			if (current->type == WORD)
-			{
-				data->cmds[cmd_index]->cmd[tab_index] = ft_strdup(current->str);
-				tab_index++;
-			}
-			current = current->next;
-		}
-		data->cmds[cmd_index]->cmd[tab_index] = 0;
+		data->cmds[i]->cmd
+			= malloc(sizeof(char *) * (word_count + 1));
+		ft_link_built_cmd(data, head, i, 1);
 	}
 }
 
-void	ft_link_cmds(t_data *data)
+void	ft_link(t_data *data)
 {
 	t_token	*current;
 	t_token	*head;
@@ -133,7 +119,7 @@ void	ft_link_cmds(t_data *data)
 				ft_link_sep(data, current, cmd_index);
 			current = current->next;
 		}
-		ft_link(data, head, cmd_index, word_count);
+		ft_link_cmds(data, head, cmd_index, word_count);
 		if (current && current->type == PIPE)
 			current = current->next;
 		cmd_index++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/10/25 10:43:43 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/25 15:18:01 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void			ft_sort_env_list(t_env **env);
 void			ft_insert_sorted(t_env **env, t_env *new_node);
 
 // Here_doc
-void			ft_heredoc_path(t_data *data);
+void			ft_heredoc_path(t_data *data, int i);
 void			ft_heredoc_create(t_data *data, int i, char *file_name);
 
 // Execution
@@ -178,7 +178,8 @@ int				ft_set_last_status(t_data *data, int status);
 void			signal_handler(int signal);
 
 // Link
-void			ft_link_cmds(t_data *data);
+void			ft_link(t_data *data);
+int				ft_isbuiltins(char *str);
 
 //	Lexer
 int				ft_lexer(t_data *data, char *line);

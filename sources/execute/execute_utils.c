@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/28 11:38:44 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 15:17:55 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 14:16:53 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	ft_free_cmds(t_data *data)
 	{
 		if (data->cmds[i]->heredoc_path)
 		{
-			if (unlink(data->cmds[i]->heredoc_path) != 0)
-				printf("heredoc%d failed to delete\n", i);
+			unlink(data->cmds[i]->heredoc_path);
 			free(data->cmds[i]->heredoc_path);
 			data->cmds[i]->heredoc_path = NULL;
 		}
@@ -34,6 +33,8 @@ void	ft_free_cmds(t_data *data)
 			free(data->cmds[i]->input_redirec);
 		if (data->cmds[i]->output_redirec)
 			free(data->cmds[i]->output_redirec);
+		if (data->cmds[i]->eof)
+			free(data->cmds[i]->eof);
 		if (data->cmds[i])
 			free(data->cmds[i]);
 		data->cmds[i] = NULL;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
+#    By: arincon <arincon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/23 12:17:43 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/25 12:13:26 by arincon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,13 @@ INCS		:=	include					\
 
 SRC_DIR		:= sources
 SRCS		:=	main.c							\
-				builtins/cd.c			\
-				builtins/echo.c		\
-				builtins/env.c			\
-				builtins/exit.c		\
-				builtins/export.c		\
-				builtins/pwd.c			\
-				builtins/unset.c		\
+				builtins/cd.c					\
+				builtins/echo.c					\
+				builtins/env.c					\
+				builtins/exit.c					\
+				builtins/export.c				\
+				builtins/pwd.c					\
+				builtins/unset.c				\
 				builtins/builtins.c				\
 				env/env_exec.c					\
 				env/env_utils.c					\
@@ -46,6 +46,7 @@ SRCS		:=	main.c							\
 				execute/pipex_utils.c			\
 				execute/here_doc.c				\
 				execute/link.c					\
+				execute/link_utils.c			\
 				lexer/expansion_utils.c			\
 				lexer/expansion_var.c			\
 				parser/parser_error.c			\

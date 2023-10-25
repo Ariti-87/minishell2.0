@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:55:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 10:56:08 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/25 15:24:15 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,23 @@ void	ft_heredoc_create(t_data *data, int i, char *file_name)
 	close(fd);
 }
 
-void	ft_heredoc_path(t_data *data)
+void	ft_heredoc_path(t_data *data, int i)
+{
+	char	*tmp;
+	int		j;
+
+	j = i + 1;
+	if (data->cmds[i]->eof)
+	{
+		tmp = ft_itoa(j);
+		data->cmds[i]->heredoc_path
+			= ft_strjoin_gnl(".build/.heredoc", tmp);
+		free(tmp);
+		if (!data->cmds[i]->heredoc_path)
+			ft_error_msn("Invalid Malloc here_doc path\n", data);
+	}
+}
+/* void	ft_heredoc_path(t_data *data)
 {
 	int		i;
 	int		j;
@@ -57,10 +73,9 @@ void	ft_heredoc_path(t_data *data)
 			data->cmds[i]->heredoc_path
 				= ft_strjoin_gnl(".build/.heredoc", tmp);
 			free(tmp);
-			printf("%s\n", data->cmds[i]->heredoc_path);
 			if (!data->cmds[i]->heredoc_path)
 				ft_error_msn("Invalid Malloc here_doc path\n", data);
 			j++;
 		}
 	}
-}
+} */
