@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/30 13:37:13 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:25:37 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static bool	ft_check_var(char c)
 		return (true);
 	else if (c >= '0' && c <= '9')
 		return (true);
-	else if (c == '_' || c == '$')
+	else if (c == '_')
 		return (true);
 	return (false);
 }
@@ -65,6 +65,8 @@ static char	*ft_identify_var(char *str, int i)
 	len = i;
 	if (str[len] == '?')
 		return ("?");
+	if (str[len] == '$')
+		return ("$");
 	while (ft_check_var(str[len]) == true)
 		len++;
 	len = len - i;
@@ -89,11 +91,12 @@ static void	ft_remplace_var(t_token **token, int i, t_data *data)
 	char	*new_str;
 
 	var = ft_identify_var((*token)->str, i);
-	printf("VAR=%s\n", var);
 	if (!var)
 		return ;
 	if (var[0] == '?')
 		value = ft_itoa(g_last_status);
+	else if (var[0] == '$')
+		value = ft_strdup("PID");
 	else
 		value = ft_get_var_value(data, var);
 	if (value != NULL)
@@ -102,7 +105,7 @@ static void	ft_remplace_var(t_token **token, int i, t_data *data)
 		free((*token)->str);
 		(*token)->str = new_str;
 	}
-	if (var[0] == '?')
+	if (var[0] == '?' || var[0] == '$')
 		ft_free_ptr(value);
 	else
 		ft_free_ptr(var);

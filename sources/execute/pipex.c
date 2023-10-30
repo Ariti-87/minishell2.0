@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 17:13:37 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:48:03 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ static void	ft_execve_nopath(t_data *data, char **cmds, char **envp, int index)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(data->cmds[index]->cmd[0], 2);
-		ft_putstr_fd(": Invalid access\n", 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		ft_close_and_free(data);
 		ft_free_tab(envp);
-		exit(126);
+		exit(127);
 	}
 	execve(cmds[0], cmds, 0);
 }
