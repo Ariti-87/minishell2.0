@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:44:43 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 13:00:25 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:37:13 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,19 @@ static char	*ft_exchange_var(char *token_str, int i, char *value, char *var)
 	return (str);
 }
 
+static bool	ft_check_var(char c)
+{
+	if (c >= 'a' && c <= 'z')
+		return (true);
+	else if (c >= 'A' && c <= 'Z')
+		return (true);
+	else if (c >= '0' && c <= '9')
+		return (true);
+	else if (c == '_' || c == '$')
+		return (true);
+	return (false);
+}
+
 // Get the what is the VAR to look in the env
 static char	*ft_identify_var(char *str, int i)
 {
@@ -50,10 +63,9 @@ static char	*ft_identify_var(char *str, int i)
 
 	i++;
 	len = i;
-	if (str[len] == '$')
-		return ("$");
-	while (str[len] != ' ' && str[len] != '=' && str[len] != '\"'
-		&& str[len] != '\'' && str[len] && str[len] != '$')
+	if (str[len] == '?')
+		return ("?");
+	while (ft_check_var(str[len]) == true)
 		len++;
 	len = len - i;
 	var = (char *)malloc(sizeof(char) * (len + 1));
@@ -77,22 +89,21 @@ static void	ft_remplace_var(t_token **token, int i, t_data *data)
 	char	*new_str;
 
 	var = ft_identify_var((*token)->str, i);
+	printf("VAR=%s\n", var);
+	if (!var)
+		return ;
 	if (var[0] == '?')
 		value = ft_itoa(g_last_status);
-	else if (var[0] == '$')
-		value = ft_itoa(getpid());
 	else
 		value = ft_get_var_value(data, var);
-	new_str = ft_exchange_var((*token)->str, i, value, var);
-	ft_free_ptr((*token)->str);
-	(*token)->str = new_str;
-	if (var[0] == '$')
-		ft_free_ptr(value);
-	else if (var[0] == '?')
+	if (value != NULL)
 	{
-		ft_free_ptr(value);
-		ft_free_ptr(var);
+		new_str = ft_exchange_var((*token)->str, i, value, var);
+		free((*token)->str);
+		(*token)->str = new_str;
 	}
+	if (var[0] == '?')
+		ft_free_ptr(value);
 	else
 		ft_free_ptr(var);
 }

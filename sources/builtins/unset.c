@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 10:23:19 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/23 12:16:35 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:28:09 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,10 @@ void	ft_unset(t_env **env, t_env **export, char **argv)
 	i = 0;
 	while (argv[++i])
 	{
-		if (ft_check_arg_env(argv[i], 0) == 1)
-		{
-			ft_putstr_fd("minishell: unset: ", 2);
-			ft_putstr_fd(argv[i], 2);
-			ft_putstr_fd(": not a valid indentifier\n", 2);
-		}
-		else
-		{
-			ft_erase_list_node(env, argv);
-			ft_erase_list_node(export, argv);
-		}
+		ft_erase_list_node(env, argv);
+		ft_erase_list_node(export, argv);
 	}
+	g_last_status = 0;
 }
 
 void	ft_erase_list_node(t_env **env, char **argv)
@@ -43,7 +35,7 @@ void	ft_erase_list_node(t_env **env, char **argv)
 	previous = NULL;
 	while (current)
 	{
-		if (!ft_strncmp(current->name, argv[1], ft_strlen(argv[1]) + 1))
+		if (!ft_strcmp(current->name, argv[1]))
 		{
 			if (!previous)
 				*env = current->next;

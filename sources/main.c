@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 17:30:46 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 13:33:15 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,6 @@ int	main(int argc, char **argv, char **envp)
 	ft_close_and_free(&data);
 	return (0);
 }
-// signal y $? con status
-// exit | ? gerer les leaks
-
-
+// signal
 // tab ?
-// $?+$?
 // cat + ctrl c

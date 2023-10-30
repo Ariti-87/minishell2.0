@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:03:55 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 17:03:58 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/30 12:11:26 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,6 @@ void			ft_pwd(void);
 void			ft_echo(char **argv);
 int				ft_echo_option(char *str);
 void			ft_exit(t_data *data, char **argv);
-void			ft_exit_arg(char *str);
-int				ft_above_lli(char *str, int sign);
 void			ft_env(t_data *data, char **argv);
 int				ft_check_arg_env(char *str, int export);
 void			ft_unset(t_env **env, t_env **export, char **argv);
@@ -156,7 +154,7 @@ void			ft_update_pwd(t_env **env, char *pwd, char *oldpwd, \
 
 // Environnment
 void			ft_get_env(t_data *data, char **envp);
-void			ft_add_env_node(t_data *data, char *name, char *var, int i);
+void			ft_add_env_node(t_data *data, char *name, char *var);
 void			ft_add_export_node(t_data *data, char *name, char *var);
 void			ft_free_list_env(t_env	*env);
 t_env			*ft_last_env_node(t_env *env);
