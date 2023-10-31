@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 14:15:39 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:01:35 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ static bool	ft_check_sep_parser(t_token *token)
 	return (false);
 }
 
-// Check if the first c is a '|' and all the erros
 static bool	ft_parser_error(t_token *token)
 {
 	t_token	*temp;
@@ -83,18 +82,6 @@ static bool	ft_parser_error(t_token *token)
 	return (false);
 }
 
-// Check parser error, then merge all the WORD, change $VAR and
-// remove the quotes
-// int	ft_parser(t_data *data, char *line)
-// {
-// 	ft_lexer(data, line);
-// 	if (ft_parser_error(data->token) != 0)
-// 		return (2);
-// 	ft_expansion_var(data);
-// 	print_lexer(&data->token);
-// 	ft_clear_quotes(data);
-// 	return (0);
-// }
 int	ft_parser(t_data *data)
 {
 	ft_expansion_var(data);
