@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:03:55 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/30 16:52:45 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:20:36 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,9 +175,8 @@ char			**ft_env_exec(t_data *data, int i);
 int				ft_cmd_count(t_data *data);
 
 // Signal
-void			signal_handler(int signal);
-void			ft_signal_interactive();
-void			ft_siganl_noninteractive();
+void			ft_signal_interactive(void);
+void			ft_siganl_noninteractive(void);
 
 // Link
 void			ft_link(t_data *data);

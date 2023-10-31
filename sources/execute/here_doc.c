@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:55:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 15:24:15 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:53:38 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ void	ft_heredoc_create(t_data *data, int i, char *file_name)
 		}
 		if (buf || buf[0])
 		{
-			if (!ft_strncmp(data->cmds[i]->eof,
-					buf, strlen(data->cmds[i]->eof)))
+			if (!ft_strcmp(data->cmds[i]->eof, buf))
 				break ;
-			write(fd, buf, strlen(buf));
+			write(fd, buf, ft_strlen(buf));
 			write(fd, "\n", 1);
 		}
 		free(buf);

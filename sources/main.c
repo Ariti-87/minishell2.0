@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 15:30:20 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/30 16:38:23 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:54:27 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,5 @@ int	main(int argc, char **argv, char **envp)
 	ft_close_and_free(&data);
 	return (0);
 }
-// signal
-// tab ?
-// cat + ctrl c
+// nm -Dgu ./minishell
+// check here doc singal

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/30 15:48:03 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:46:58 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	ft_execve_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
 		ft_putstr_fd(": command not found\n", 2);
 		ft_close_and_free(data);
 		ft_free_tab(envp);
+		free(data->path);
 		exit (127);
 	}
 	execve(cmd_final, cmds, envp);
@@ -83,6 +84,13 @@ void	ft_execve(t_data *data, int cmd_index)
 	int		i;
 
 	i = 0;
+	data->path = ft_env_path(data);
+	if (data->path)
+	{
+		data->paths = ft_split(data->path, ':');
+		if (!data->paths)
+			ft_error_msn("split doesnt work with **paths\n", data);
+	}
 	envp = ft_env_exec(data, i);
 	if (data->path && !ft_strchr(data->cmds[cmd_index]->cmd[0], '/'))
 		ft_execve_cmd(data, data->cmds[cmd_index]->cmd, envp, cmd_index);

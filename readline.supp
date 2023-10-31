@@ -1,14 +1,12 @@
 {
     _fuck_readline_
         Memcheck:Leak
-        match-leak-kinds: all
         ...
         fun:readline
     }
     {
     _fuck_add_history_
         Memcheck:Leak
-        match-leak-kinds: all
         ...
         fun:add_history
 }

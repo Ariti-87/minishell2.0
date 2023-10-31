@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/30 17:21:37 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:21:17 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,18 +87,9 @@ static bool	ft_parser_error(t_token *token)
 // remove the quotes
 int	ft_parser(t_data *data)
 {
-	// t_token	*current;
-
-	// current = data->token;
 	if (ft_parser_error(data->token) != 0)
 		return (2);
 	ft_expansion_var(data);
-	// while (current)
-	// {
-	// 	if (current->type == WORD)
-	// 		ft_lexer(data, current->str);
-	// 	current = current->next;
-	// }
 	ft_clear_quotes(data);
 	return (0);
 }

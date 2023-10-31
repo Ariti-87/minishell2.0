@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/25 14:11:40 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 15:45:37 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_close_and_free(t_data *data)
 {
 	if (data->paths)
 		ft_free_tab(data->paths);
+	if (data->path)
+		free(data->path);
 	if (data->pipes)
 	{
 		ft_close_pipes(data);
@@ -106,22 +108,11 @@ void	ft_waitpid(t_data *data)
 		i++;
 	}
 	save_status = status;
-	if (WIFEXITED(save_status))
+	if (WIFSIGNALED(save_status))
+		status = 128 + WTERMSIG(save_status);
+	else if (WIFEXITED(save_status))
 		status = WEXITSTATUS(save_status);
+	else
+		status = save_status;
 	g_last_status = status;
 }
-/* // Extracts the PATH variable from the environment.
-// Copy PATH string without "PATH="
-char	*ft_env_path(char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH", 4) == 0)
-			return (envp[i] + 5);
-		i++;
-	}
-	return (NULL);
-} */

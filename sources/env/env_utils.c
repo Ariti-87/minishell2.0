@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 13:27:56 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/20 16:55:37 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:55:03 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_insert_sorted(t_env **env, t_env *new_node)
 {
 	t_env	*current;
 
-	if (*env == NULL || strcmp((*env)->name, new_node->name) > 0)
+	if (*env == NULL || ft_strcmp((*env)->name, new_node->name) > 0)
 	{
 		new_node->next = *env;
 		*env = new_node;
@@ -73,7 +73,7 @@ void	ft_insert_sorted(t_env **env, t_env *new_node)
 	{
 		current = *env;
 		while (current->next != NULL
-			&& strcmp(current->next->name, new_node->name) <= 0)
+			&& ft_strcmp(current->next->name, new_node->name) <= 0)
 		{
 			current = current->next;
 		}

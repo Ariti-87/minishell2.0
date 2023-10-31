@@ -6,7 +6,7 @@
 /*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/24 17:20:57 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/24 17:21:01 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/31 15:49:24 by arincon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,6 @@ void	ft_init(t_data *data, char **envp)
 	g_last_status = 0;
 	*data = (t_data){0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 	ft_get_env(data, envp);
-	data->path = ft_env_path(data);
-	if (data->path)
-	{
-		data->paths = ft_split(data->path, ':');
-		if (!data->paths)
-			ft_error_msn("split doesnt work with **paths\n", data);
-	}
 	ft_init_pipe(data);
 }
 
