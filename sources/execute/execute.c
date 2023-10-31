@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:02:46 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 16:05:41 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 16:09:00 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	ft_minishell(t_data *data)
 			ft_execute_minishell(data);
 		}
 		free(data->line);
-		// line = NULL;
 	}
 }
 
