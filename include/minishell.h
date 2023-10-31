@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:03:55 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/30 16:52:45 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:34:39 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct s_data
 	struct s_cmd	**cmds;
 	struct s_env	*env;
 	struct s_env	*export;
+	char			*line;
 }					t_data;
 
 // Utils
@@ -166,7 +167,7 @@ void			ft_heredoc_create(t_data *data, int i, char *file_name);
 
 // Execution
 void			ft_minishell(t_data *data);
-void			ft_execute_minishell(t_data *data, char *line);
+void			ft_execute_minishell(t_data *data);
 void			ft_execute(t_data *data);
 void			ft_execute_init(t_data *data);
 void			ft_free_cmds(t_data *data);
@@ -183,14 +184,12 @@ void			ft_siganl_noninteractive();
 void			ft_link(t_data *data);
 int				ft_isbuiltins(char *str);
 
-//	Lexer
+// Parser
 int				ft_lexer(t_data *data, char *line);
 int				ft_set_status_quote(int quote, char *line, int i);
 void			ft_add_sep(t_token **token, char *line, int i, int len);
 void			ft_add_word(t_token **token, char *line, int i, int start);
 int				ft_set_sep_type(char *line, int i);
-
-// Parser
 int				ft_parser(t_data *data);
 void			ft_clear_quotes(t_data *data);
 
