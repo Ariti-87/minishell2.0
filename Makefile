@@ -6,7 +6,7 @@
 #    By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: Invalid date        by                   #+#    #+#              #
-#    Updated: 2023/10/25 16:57:46 by ddania-c         ###   ########.fr        #
+#    Updated: 2023/10/31 14:59:50 by ddania-c         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,12 +47,12 @@ SRCS		:=	main.c						\
 				execute/here_doc.c			\
 				execute/link.c				\
 				execute/link_utils.c		\
-				lexer/expansion_utils.c		\
-				lexer/expansion_var.c		\
+				parser/expansion_utils.c	\
+				parser/expansion_var.c		\
 				parser/quote.c				\
 				parser/parser.c				\
-				lexer/lexer.c				\
-				lexer/lexer_utils.c			\
+				parser/lexer.c				\
+				parser/lexer_utils.c		\
 				utils/free.c				\
 				utils/init.c				\
 				utils/signal.c				\

@@ -6,13 +6,12 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 15:31:06 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/25 15:33:23 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:11:16 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// Print the contents of a token list.
 void	print_lexer(t_token **list)
 {
 	t_token	*current;

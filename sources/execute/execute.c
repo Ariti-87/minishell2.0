@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:02:46 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 14:25:07 by arincon          ###   ########.fr       */
+/*   Updated: 2023/10/31 16:05:41 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,32 +14,29 @@
 
 void	ft_minishell(t_data *data)
 {
-	char	*line;
-
 	while (1)
 	{
 		ft_signal_interactive();
-		line = readline("minishell$ ");
+		data->line = readline("minishell$ ");
 		ft_siganl_noninteractive();
-		if (!line)
+		if (!data->line)
 		{
 			write(1, "exit\n", 5);
 			break ;
 		}
-		if (line && line[0])
+		if (data->line && data->line[0])
 		{
-			add_history(line);
-			ft_execute_minishell(data, line);
+			add_history(data->line);
+			ft_execute_minishell(data);
 		}
-		free(line);
-		line = NULL;
+		free(data->line);
+		// line = NULL;
 	}
 }
 
-void	ft_execute_minishell(t_data *data, char *line)
+void	ft_execute_minishell(t_data *data)
 {
-	ft_lexer(data, line);
-	if (ft_parser(data) != 0 || data->token->type == END)
+	if (ft_parser(data) != 0)
 	{
 		ft_free_parsing(data);
 		g_last_status = 2;
