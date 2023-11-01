@@ -6,15 +6,14 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:55:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 12:08:10 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:08:37 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_heredoc_create(t_data *data, int i, char *file_name)
+void	ft_heredoc_create(t_data *data, int i, char *file_name, int fd)
 {
-	int		fd;
 	char	*buf;
 
 	fd = open(file_name, O_WRONLY | O_TRUNC | O_CREAT, 0644);
@@ -34,7 +33,6 @@ void	ft_heredoc_create(t_data *data, int i, char *file_name)
 		{
 			if (!ft_strcmp(data->cmds[i]->eof, buf))
 				break ;
-
 			write(fd, buf, ft_strlen(buf));
 			write(fd, "\n", 1);
 		}
@@ -59,4 +57,3 @@ void	ft_heredoc_path(t_data *data, int i)
 			ft_error_msn("Invalid Malloc here_doc path\n", data);
 	}
 }
-

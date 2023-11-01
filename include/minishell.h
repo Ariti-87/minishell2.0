@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:03:55 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/11/01 12:01:45 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:07:17 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,7 +163,7 @@ void			ft_insert_sorted(t_env **env, t_env *new_node);
 
 // Here_doc
 void			ft_heredoc_path(t_data *data, int i);
-void			ft_heredoc_create(t_data *data, int i, char *file_name);
+void			ft_heredoc_create(t_data *data, int i, char *file_name, int fd);
 
 // Execution
 void			ft_minishell(t_data *data);

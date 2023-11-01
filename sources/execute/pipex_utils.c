@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/12 10:32:02 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 12:34:49 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:01:47 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ void	ft_close_and_free(t_data *data)
 {
 	if (data->paths)
 		ft_free_tab(data->paths);
-	// if (data->path)
-	// 	free(data->path);
 	if (data->pipes)
 	{
 		ft_close_pipes(data);

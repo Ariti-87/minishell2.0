@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 18:14:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 12:06:01 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 15:08:53 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,9 @@ static void	ft_link_in_out(t_data *data, t_token *current, int i)
 
 static void	ft_link_sep(t_data *data, t_token *current, int i)
 {
+	int	fd;
+
+	fd = 0;
 	if (current->type == LESS)
 	{
 		if (data->cmds[i]->input_redirec)
@@ -49,7 +52,7 @@ static void	ft_link_sep(t_data *data, t_token *current, int i)
 		}
 		data->cmds[i]->eof = ft_strdup(current->next->str);
 		ft_heredoc_path(data, i);
-		ft_heredoc_create(data, i, data->cmds[i]->heredoc_path);
+		ft_heredoc_create(data, i, data->cmds[i]->heredoc_path, fd);
 	}
 	else
 		ft_link_in_out(data, current, i);
