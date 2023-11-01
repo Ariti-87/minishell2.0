@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 16:00:55 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:02:50 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static void	ft_execve_nopath(t_data *data, char **cmds, char **envp, int index)
 }
 
 void	ft_execve(t_data *data, int cmd_index)
-{
+{	
 	char	**envp;
 	int		i;
 
