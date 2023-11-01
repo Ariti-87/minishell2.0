@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:03:55 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 16:04:58 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 12:01:45 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ int				ft_cmd_count(t_data *data);
 
 // Signal
 void			ft_signal_interactive(void);
-void			ft_siganl_noninteractive(void);
+void			ft_signal_noninteractive(void);
 
 // Link
 void			ft_link(t_data *data);

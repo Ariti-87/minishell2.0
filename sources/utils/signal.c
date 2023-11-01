@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:00:31 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/31 14:20:13 by arincon          ###   ########.fr       */
+/*   Updated: 2023/11/01 12:01:07 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	signal_print_newline(int signal)
 	rl_on_new_line();
 }
 
-void	ft_siganl_noninteractive(void)
+void	ft_signal_noninteractive(void)
 {
 	struct sigaction	signal;
 

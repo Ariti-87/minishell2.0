@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 12:12:28 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 16:08:31 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:15:32 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,10 +85,12 @@ static bool	ft_parser_error(t_token *token)
 int	ft_parser(t_data *data)
 {
 	ft_expansion_var(data);
+	printf("LINE=%s", data->line);
 	if (ft_lexer(data, data->line) != 0)
 		return (1);
 	if (ft_parser_error(data->token) != 0)
 		return (2);
+	print_lexer(&data->token);
 	ft_clear_quotes(data);
 	return (0);
 }

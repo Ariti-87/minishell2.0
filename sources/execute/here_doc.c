@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 11:55:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/31 15:53:38 by arincon          ###   ########.fr       */
+/*   Updated: 2023/11/01 12:08:10 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	ft_heredoc_create(t_data *data, int i, char *file_name)
 		ft_error_msn("An error occured with open of here_doc\n", data);
 	while (1)
 	{
+		ft_signal_interactive();
 		buf = readline("heredoc> ");
+		ft_signal_noninteractive();
 		if (!buf)
 		{
 			printf("\n");
@@ -32,6 +34,7 @@ void	ft_heredoc_create(t_data *data, int i, char *file_name)
 		{
 			if (!ft_strcmp(data->cmds[i]->eof, buf))
 				break ;
+
 			write(fd, buf, ft_strlen(buf));
 			write(fd, "\n", 1);
 		}
@@ -56,25 +59,4 @@ void	ft_heredoc_path(t_data *data, int i)
 			ft_error_msn("Invalid Malloc here_doc path\n", data);
 	}
 }
-/* void	ft_heredoc_path(t_data *data)
-{
-	int		i;
-	int		j;
-	char	*tmp;
 
-	i = -1;
-	j = 1;
-	while (++i < data->cmds_nb)
-	{
-		if (data->cmds[i]->eof)
-		{
-			tmp = ft_itoa(j);
-			data->cmds[i]->heredoc_path
-				= ft_strjoin_gnl(".build/.heredoc", tmp);
-			free(tmp);
-			if (!data->cmds[i]->heredoc_path)
-				ft_error_msn("Invalid Malloc here_doc path\n", data);
-			j++;
-		}
-	}
-} */

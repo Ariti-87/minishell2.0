@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arincon <arincon@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/10/31 15:46:58 by arincon          ###   ########.fr       */
+/*   Updated: 2023/11/01 12:48:08 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,9 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 			ft_close_and_free(data);
 			exit(67);
 		}
-		if (data->cmds[cmd_index]->cmd)
+		if (data->cmds[cmd_index]->cmd[0])
 			ft_execve(data, cmd_index);
+		ft_close_and_free(data);
 		exit(0);
 	}
 	if (cmd_index)
@@ -58,7 +59,6 @@ static void	ft_execve_cmd(t_data *data, char **cmds, char **envp, int cmd_index)
 		ft_putstr_fd(": command not found\n", 2);
 		ft_close_and_free(data);
 		ft_free_tab(envp);
-		free(data->path);
 		exit (127);
 	}
 	execve(cmd_final, cmds, envp);

@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:02:46 by ddania-c          #+#    #+#             */
-/*   Updated: 2023/10/31 16:09:00 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 13:59:12 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_minishell(t_data *data)
 	{
 		ft_signal_interactive();
 		data->line = readline("minishell$ ");
-		ft_siganl_noninteractive();
+		ft_signal_noninteractive();
 		if (!data->line)
 		{
 			write(1, "exit\n", 5);
