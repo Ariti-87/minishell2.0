@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 12:48:08 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/01 14:49:50 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	ft_execve_nopath(t_data *data, char **cmds, char **envp, int index)
 		ft_free_tab(envp);
 		exit(127);
 	}
-	execve(cmds[0], cmds, 0);
+	execve(cmds[0], cmds, envp);
 }
 
 void	ft_execve(t_data *data, int cmd_index)
