@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 12:51:26 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 15:42:24 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:48:31 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	ft_cd_directory(t_data *data, char *pwd, char *oldpwd, char *str)
 	if ((!chdir(str)) == 0)
 	{
 		ft_putstr_fd("minishell: cd: No such file or directory\n", 2);
+		g_last_status = 1;
+		return ;
 	}
 	else
 	{

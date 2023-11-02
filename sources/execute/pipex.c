@@ -6,7 +6,7 @@
 /*   By: ddania-c <ddania-c@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 17:01:46 by arincon           #+#    #+#             */
-/*   Updated: 2023/11/01 16:02:50 by ddania-c         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:32:54 by ddania-c         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ pid_t	ft_fork(t_data *data, int cmd_index)
 		{
 			ft_builtins(data, cmd_index);
 			ft_close_and_free(data);
-			exit(67);
+			exit(0);
 		}
 		if (data->cmds[cmd_index]->cmd[0])
 			ft_execve(data, cmd_index);
@@ -79,7 +79,7 @@ static void	ft_execve_nopath(t_data *data, char **cmds, char **envp, int index)
 }
 
 void	ft_execve(t_data *data, int cmd_index)
-{	
+{
 	char	**envp;
 	int		i;
 
